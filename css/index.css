@@ -5,8 +5,9 @@ body {
 h3 {
 	font-size:1.5rem;
 	font-style:italic;
-	opacity:.5
+	opacity:1
 }
+
 a {
 	color:#09c;
 	text-decoration:none
@@ -14,12 +15,13 @@ a {
 a:visited {
 	color:#09c
 }
-a:hover{
+a:hover {
 	color:#6cf
 }
-.q{
+
+.q {
 	font-weight:700
 }
-.a{
+.a {
 	text-indent:25px
 }
