@@ -155,8 +155,8 @@ font-feature-settings: 'liga' 1;
 
 div#content { /* wraps both main and subnavigation */
     padding: 3rem 0 18rem 0;
-    margin-left: 12rem;
-    margin-right: 2.5rem;
+    margin-left: 8rem;
+    margin-right: 8rem;
 }
 
 @media all and (max-width:520px) {
