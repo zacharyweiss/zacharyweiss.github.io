@@ -835,7 +835,7 @@ p.image a:hover img {
 .subhead > a:hover:after {
     margin-left: 0.10em;
     color: #999;
-    content: "Â #";
+    content: " #";
     position: relative;
     top: -0.08em;
 }
