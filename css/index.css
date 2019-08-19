@@ -1,0 +1,25 @@
+body {
+	width:600px;
+	margin-left:15%
+}
+h3 {
+	font-size:1.5rem;
+	font-style:italic;
+	opacity:.5
+}
+a {
+	color:#09c;
+	text-decoration:none
+}
+a:visited {
+	color:#09c
+}
+a:hover{
+	color:#6cf
+}
+.q{
+	font-weight:700
+}
+.a{
+	text-indent:25px
+}
