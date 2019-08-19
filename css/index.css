@@ -161,7 +161,7 @@ div#content { /* wraps both main and subnavigation */
 
 @media all and (max-width:520px) {
     div#content {
-        margin: 1.5rem;
+        margin: 0rem;
         padding: 0;
     }
 }
