@@ -742,7 +742,7 @@ ui:after {
 
 a {
 text-decoration: none;
-color: inheret; 
+color: inherit;
 transition-property: background;
 transition-duration: 0.2s;
 
