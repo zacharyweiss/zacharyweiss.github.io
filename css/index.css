@@ -1384,6 +1384,35 @@ transition-duration: 0.2s;
 
 
 
+/* tooltip fun */
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 2px;
+  padding: 2px 0;
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  left: 100%;
+  margin-top: -5px;
+  
+  /* Fade in tooltip - takes 1 second to go from 0% to 100% opac: */
+  opacity: 0;
+  transition: opacity 0.5s linear 3s;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+
+
+
+
 /* internet explorer hider */
 
 .ie {
