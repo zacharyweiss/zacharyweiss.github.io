@@ -1392,13 +1392,13 @@ transition-duration: 0.2s;
   background-color: black;
   color: #fff;
   text-align: center;
-  border-radius: 2px;
-  padding: 2px 0;
+  border-radius: 6px;
+  padding: 5px 0;
   position: absolute;
   z-index: 1;
-  top: 50%;
-  left: 100%;
-  margin-top: -5px;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -60px;
   
   /* Fade in tooltip - takes 1 second to go from 0% to 100% opac: */
   opacity: 0;
