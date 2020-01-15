@@ -4,7 +4,7 @@
 }
 
 html { 
-	font-size: 2.4vw;
+	/*font-size: 2.4vw;*/
 	height: 100%;
 }
 
@@ -60,7 +60,6 @@ topic {
 	padding-top: 0.02em;
 	hyphens: none;
 }
-
 topic.small {
 	font-family: inherit;
 	font-size: 170%; text-transform: inherit;
@@ -85,4 +84,26 @@ a:hover {
 	transition-property: background;
 	transition-duration: 0.2s;
 	border-radius: 8px;
+}
+
+
+
+
+.body-text_equity {
+	font-family: equity-text;
+	line-height: 1.4;
+	font-size: 0.98rem;
+	font-feature-settings: 'onum' 1;;
+}
+.body-text_concourse {
+	font-family: concourse-text;
+	line-height: 1.35;
+	font-size: 1rem;
+}
+
+.body-text_equity .small-caps {
+	font-family: equity-caps;
+}
+.body-text_concourse .small-caps {
+	font-family: concourse-caps;
 }
