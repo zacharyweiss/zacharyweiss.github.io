@@ -48,6 +48,10 @@ div#content {
 	}
 }
 
+pre {
+	margin-bottom: 0.5rem
+}
+
 topic {
 	display: block;
 	font-family: inherit;/*"advocate-c41";*/
