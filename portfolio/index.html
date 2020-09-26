@@ -10,6 +10,7 @@
 	<link rel="stylesheet" type="text/css" media="all" href="/fonts/equity-heavy.css">
 	<title>ME460 Portfolio</title>
 	<!-- <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.css"> -->
+    <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
 	<link rel="stylesheet" type="text/css" href="css/index.css">
 	<style type="text/css">
 		body.hidden { opacity: 0; }
@@ -45,8 +46,8 @@
         <div class="subhead small-caps" id="code">
             <a href="#code">code</a>
         </div>
-        <pre>
-            <code>#define NORTH 1
+        <pre class="prettyprint lang-c"><!--
+            <code>-->#define NORTH 1
 #define SOUTH 2
 #define OFF 0
 
@@ -178,8 +179,8 @@ void shutdown() {
   digitalWrite (13,LOW);
   digitalWrite (11,LOW);
   digitalWrite (8,LOW);
-}</code>
-        </pre>
+}<!--</code>
+        --></pre>
 		<div class="subhead small-caps" id="data">
 			<a href="#data">data</a>
 		</div>
