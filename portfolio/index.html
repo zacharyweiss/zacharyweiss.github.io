@@ -33,7 +33,7 @@
 .dec{color: purple;}
 pre.prettyprint { 
     display: block; 
-    background-color: #333
+    background-color: #eee
     /*font-family: monospace;*/
     font-size: 12px;
     /*background-color: #eee;
@@ -46,9 +46,8 @@ pre.prettyprint {
     white-space: -o-pre-wrap;    /* Opera 7 */
     word-wrap: break-word;       /* Internet Explorer 5.5+ */
 }
-pre .nocode { background-color: none; color: #000 }
 /* Specify class=linenums on a pre to get line numbering */
-ol.linenums { margin-top: 0; margin-bottom: 0; color: #AEAEAE } /* IE indents via margin-left */
+ol.linenums { margin-top: 0; margin-bottom: 0; color: #eee } /* IE indents via margin-left */
 li.L0,li.L1,li.L2,li.L3,li.L5,li.L6,li.L7,li.L8 { list-style-type: none }
 /* Alternate shading for lines */
 li.L1,li.L3,li.L5,li.L7,li.L9 { }
@@ -109,8 +108,7 @@ li.L1, li.L3, li.L5, li.L7, li.L9 {
         <div class="subhead small-caps" id="code">
             <a href="#code">code</a>
         </div>
-        <div class="code">
-        <pre class="prettyprint lang-c linenums code"><!--
+        <pre class="prettyprint lang-c"><!--
             <code>-->#define NORTH 1
 #define SOUTH 2
 #define OFF 0
@@ -244,7 +242,7 @@ void shutdown() {
   digitalWrite (11,LOW);
   digitalWrite (8,LOW);
 }<!--</code>
-        --></pre></div>
+        --></pre>
 		<div class="subhead small-caps" id="data">
 			<a href="#data">data</a>
 		</div>
