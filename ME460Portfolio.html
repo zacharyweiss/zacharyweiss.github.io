@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<!--<meta charset="utf-8"/>-->
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="format-detection" content="telephone=no">
+	<!--<script type="text/javascript" src="/function.js"></script>-->
+	<link rel="preload" as="style" type="text/css" media="all" href="/fonts/equity-heavy.css">
+	<link rel="stylesheet" type="text/css" media="all" href="/fonts/equity-heavy.css">
+	<title>ME460 Portfolio</title>
+	<!-- <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.css"> -->
+	<link rel="stylesheet" type="text/css" href="css/index.css">
+	<style type="text/css">
+		body.hidden { opacity: 0; }
+        pre code {
+            font-family: monospace;
+            font-size: 10px;
+            background-color: #eee;
+            border: 1px solid #999;
+            display: block;
+            padding: 20px;
+        }
+	</style>
+	<!--Favicons-->
+	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+	<link rel="manifest" href="/site.webmanifest">
+	<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+	<meta name="msapplication-TileColor" content="#da532c">
+	<meta name="theme-color" content="#ffffff">
+</head>
+<body id="body" class="body-text_equity" body-text="true">
+<div id="content">
+	<div id="doc">
+		<topic class="small">Linear Drive Code and Data (Intermediate Deliverables)</topic>
+		<p>Below are the intermediate deliverables for <i>Design Project #1</i> of ME460, this page will be updated with a full writeup for the Wednesday deliverables.        
+        </p>
+        <div class="subhead" id="code">
+            <a href="#code">Code</a>
+        </div>
+        <pre>
+            <code>#define NORTH 1
+#define SOUTH 2
+#define OFF 0
+
+void setup() {
+  // Coil A:
+  pinMode(12,OUTPUT);  //Dir
+  pinMode(3,OUTPUT);  // On/Off
+  pinMode(9,OUTPUT); // Brake
+
+  // Coil B:
+  pinMode(13,OUTPUT);
+  pinMode(11,OUTPUT);
+  pinMode(8,OUTPUT);
+
+  shutdown();
+
+  Serial.begin(115200);
+}
+
+float iA=0, iB=0;
+double t0, t;
+int ct=0;  nju
+int t_d=5000;
+
+void loop() {
+  t0 = micros();
+  
+  for (ct=1;ct<=300;ct++) {  // 50 1 rev ; 100 2 rev
+    back();
+    iA = float(analogRead(0)) /1023.0*5.0 / 1.65 * 1000.0;
+    iB = float(analogRead(1)) /1023.0*5.0 / 1.65 * 1000.0;
+    Serial.println(String((micros()-t0)/1000000)
+                   +"\t"
+                   +String(ct*4)
+                   +"\t"
+                   +String(iA)
+                   +"\t"
+                   +String(iB)
+    );
+  }
+  
+  for (ct=1;ct<=300;ct++) {
+    forward();
+    iA= float(analogRead(0)) /1023.0*5.0 / 1.65 * 1000.0;
+    iB= float(analogRead(1)) /1023.0*5.0 / 1.65 * 1000.0;
+    Serial.print(String((micros()-t0)/1000000)+"\t"+String(ct*4));
+    Serial.print("\t");
+    Serial.print(iA);
+    Serial.print("\t");
+    Serial.println(iB);
+  }
+  
+  shutdown();
+  while(1); 
+}
+
+void coilA(int polarity) {
+  digitalWrite(9,LOW); //takes off break
+  if (polarity == NORTH) {
+    digitalWrite(12,HIGH);
+    digitalWrite(3,HIGH); //Enable coil
+  }
+  if (polarity == SOUTH) {
+    digitalWrite(12,LOW);
+    digitalWrite(3,HIGH); //Enable coil
+  }
+  if (polarity == OFF) {
+    digitalWrite(12,LOW);
+    digitalWrite(3,LOW); //Enable coil
+  }
+}
+
+void coilB(int polarity) {
+  digitalWrite(8,LOW); //takes off break
+  if (polarity == NORTH) {
+    digitalWrite(13,HIGH);
+    digitalWrite(11,HIGH); //Enable coil
+  }
+  if (polarity == SOUTH) {
+    digitalWrite(13,LOW);
+    digitalWrite(11,HIGH); //Enable coil
+  }
+  if (polarity == OFF) {
+    digitalWrite(13,LOW);
+    digitalWrite(11,LOW); //Enable coil
+  }
+}
+
+void forward() {
+  coilA(NORTH);
+  coilB(OFF);
+  delayMicroseconds(t_d);
+  coilA(OFF);
+  coilB(NORTH);
+  delayMicroseconds(t_d);
+  coilA(SOUTH);
+  coilB(OFF);
+  delayMicroseconds(t_d);
+  coilA(OFF);
+  coilB(SOUTH);
+  delayMicroseconds(t_d);
+  coilA(NORTH);
+  coilB(OFF);
+  delayMicroseconds(t_d);
+}
+
+void back() {
+  coilA(OFF);
+  coilB(NORTH);
+  delayMicroseconds(t_d); // 2000 is the impulse width 6000 longer than 2000
+  coilA(NORTH);
+  coilB(OFF);
+  delayMicroseconds(t_d);
+  coilA(OFF);
+  coilB(SOUTH);
+  delayMicroseconds(t_d);
+  coilA(SOUTH);
+  coilB(OFF);
+  delayMicroseconds(t_d);
+  coilA(OFF);
+  coilB(NORTH);
+  delayMicroseconds(t_d);
+}
+
+void shutdown() {
+  digitalWrite (12,LOW);
+  digitalWrite (3,LOW);
+  digitalWrite (9,LOW);
+  digitalWrite (13,LOW);
+  digitalWrite (11,LOW);
+  digitalWrite (8,LOW);
+}</code>
+        </pre>
+        <!--<p>Howdy.</p>
+		<p>I'm building this boyo out, keep your eyes peeled for updates. Or harass me into making progress if this hasn't changed in a bit. Whatever floats your boat.</p>
+
+		<p>People, greentech, biomedical, neuro, automotive, autonomy, machine learning, words, film, illustration, typography, audio, and a few more.</p>-->
+		<div class="subhead" id="data">
+			<a href="#data">Data</a>
+		</div>
+	</div>
+</div>
+</body>
+</html>
+<!-- 2019 Zachary Weiss -->
