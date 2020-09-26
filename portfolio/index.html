@@ -15,20 +15,22 @@
 	<style type="text/css">
 		body.hidden { opacity: 0; }
         pre.prettyprint { 
-    display: block; 
-    background-color: #eee
-    /*font-family: monospace;*/
-    font-size: 12px;
-    /*background-color: #eee;
-    border: 1px solid #999;
-    display: block;*/
-    padding: 20px;
-    white-space: pre-wrap;       /* Since CSS 2.1 */
-    white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
-    white-space: -pre-wrap;      /* Opera 4-6 */
-    white-space: -o-pre-wrap;    /* Opera 7 */
-    word-wrap: break-word;       /* Internet Explorer 5.5+ */
-}
+            display: block; 
+            background-color: #eee
+            /*font-family: monospace;*/
+            font-size: 12px;
+            /*background-color: #eee;
+            border: 1px solid #999;
+            display: block;*/
+            padding: 20px;
+            white-space: pre-wrap;       /* Since CSS 2.1 */
+            white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+            white-space: -pre-wrap;      /* Opera 4-6 */
+            white-space: -o-pre-wrap;    /* Opera 7 */
+            word-wrap: break-word;       /* Internet Explorer 5.5+ */
+        }
+        ol.linenums { margin-top: 0; margin-bottom: 0 } /* IE indents via margin-left */
+        li {background: #eee;}
 </style><!--
 /*
 * Derived from einaros's Sons of Obsidian theme at
@@ -110,8 +112,7 @@ li.L1, li.L3, li.L5, li.L7, li.L9 {
         <div class="subhead small-caps" id="code">
             <a href="#code">code</a>
         </div>
-        <pre class="prettyprint lang-c"><!--
-            <code>-->#define NORTH 1
+        <pre class="prettyprint lang-c">#define NORTH 1
 #define SOUTH 2
 #define OFF 0
 
@@ -243,8 +244,7 @@ void shutdown() {
   digitalWrite (13,LOW);
   digitalWrite (11,LOW);
   digitalWrite (8,LOW);
-}<!--</code>
-        --></pre>
+}</pre>
 		<div class="subhead small-caps" id="data">
 			<a href="#data">data</a>
 		</div>
