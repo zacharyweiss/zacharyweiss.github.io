@@ -14,87 +14,7 @@
 	<link rel="stylesheet" type="text/css" href="css/index.css">
 	<style type="text/css">
 		body.hidden { opacity: 0; }
-        .prettyprint { 
-
-        }
-        pre code {
-            display: block; 
-            background-color: #eee
-            font-family: monospace;
-            font-size: 12px;
-            border: 1px solid #eee;
-            padding: 15px;
-            white-space: pre-wrap;       /* Since CSS 2.1 */
-            white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
-            white-space: -pre-wrap;      /* Opera 4-6 */
-            white-space: -o-pre-wrap;    /* Opera 7 */
-            word-wrap: break-word;       /* Internet Explorer 5.5+ */
-        }
-        /*ol.linenums { margin-top: 0; margin-bottom: 0 }
-        li {background: #eee;}*/
-</style><!--
-/*
-* Derived from einaros's Sons of Obsidian theme at
-* http://studiostyl.es/schemes/son-of-obsidian by
-* Alex Ford of CodeTunnel:
-* http://CodeTunnel.com/blog/post/71/google-code-prettify-obsidian-theme
-*/
-.str{color: #EC7600;}
-.kwd{color: #93C763;}
-.com{color: #66747B;}
-.typ{color: #678CB1;}
-.lit{color: #FACD22;}
-.pun{color: #F1F2F3;}
-.pln{color: #F1F2F3;}
-.tag{color: #8AC763;}
-.atn{color: #E0E2E4;}
-.atv{color: #EC7600;}
-.dec{color: purple;}
-
-/* Specify class=linenums on a pre to get line numbering */
-ol.linenums { margin-top: 0; margin-bottom: 0; color: #eee } /* IE indents via margin-left */
-li.L0,li.L1,li.L2,li.L3,li.L5,li.L6,li.L7,li.L8 { list-style-type: none }
-/* Alternate shading for lines */
-li.L1,li.L3,li.L5,li.L7,li.L9 { }
-/*pre.prettyprint{border: 0px solid #888;}
-ol.linenums{
-    margin-top: 0;
-    margin-bottom: 0;
-}
-li.L0, li.L1, li.L2, li.L3, li.L4, li.L5, li.L6, li.L7, li.L8, li.L9
-{
-    color: #555;
-    list-style-type: decimal;
-}
-li.L1, li.L3, li.L5, li.L7, li.L9 {
-    background: #111;
-}*/
-@media print{
-    .str{color: #060;}
-    .kwd{color: #006; font-weight: bold;}
-    .com{color: #600; font-style: italic;}
-    .typ{color: #404; font-weight: bold;}
-    .lit{color: #044;}
-    .pun{color: #440;}
-    .pln{color: #000;}
-    .tag{color: #006; font-weight: bold;}
-    .atn{color: #404;}
-    .atv{color: #060;}
-}
-.prettyprint {
-    /*font-family: monospace;*/
-    font-size: 12px;
-    /*background-color: #eee;
-    border: 1px solid #999;
-    display: block;*/
-    padding: 20px;
-    white-space: pre-wrap;       /* Since CSS 2.1 */
-    white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
-    white-space: -pre-wrap;      /* Opera 4-6 */
-    white-space: -o-pre-wrap;    /* Opera 7 */
-    word-wrap: break-word;       /* Internet Explorer 5.5+ */
-}
-	</style>-->
+    </style>
 	<!--Favicons-->
 	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -113,7 +33,8 @@ li.L1, li.L3, li.L5, li.L7, li.L9 {
         <div class="subhead small-caps" id="code">
             <a href="#code">code</a>
         </div>
-        <pre class="prettyprint lang-c"><code>#define OFF   0
+        <p>Full step:</p>
+<pre><code>#define OFF   0
 #define NORTH 1
 #define SOUTH 2
 
