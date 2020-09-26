@@ -78,16 +78,12 @@ a {
 	transition-property: background;
 	transition-duration: 0.2s;
 }
-
 a:hover {
 	background: #fbf3f3;
 	transition-property: background;
 	transition-duration: 0.2s;
 	border-radius: 8px;
 }
-
-
-
 
 .body-text_equity {
 	font-family: equity-text;
