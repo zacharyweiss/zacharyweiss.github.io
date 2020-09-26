@@ -10,16 +10,16 @@
 	<link rel="stylesheet" type="text/css" media="all" href="/fonts/equity-heavy.css">
 	<title>ME460 Portfolio</title>
 	<!-- <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.css"> -->
-    <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+    <!--<script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>-->
 	<link rel="stylesheet" type="text/css" href="css/index.css">
 	<style type="text/css">
 		body.hidden { opacity: 0; }
         .prettyprint { 
             display: block; 
             background-color: #eee
-            /*font-family: monospace;*/
+            font-family: monospace;
             font-size: 12px;
-            /*border: 1px solid #999;*/
+            border: 1px solid #999;
             padding: 20px;
             white-space: pre-wrap;       /* Since CSS 2.1 */
             white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
@@ -27,8 +27,8 @@
             white-space: -o-pre-wrap;    /* Opera 7 */
             word-wrap: break-word;       /* Internet Explorer 5.5+ */
         }
-        ol.linenums { margin-top: 0; margin-bottom: 0 } /* IE indents via margin-left */
-        li {background: #eee;}
+        /*ol.linenums { margin-top: 0; margin-bottom: 0 }
+        li {background: #eee;}*/
 </style><!--
 /*
 * Derived from einaros's Sons of Obsidian theme at
@@ -110,17 +110,20 @@ li.L1, li.L3, li.L5, li.L7, li.L9 {
         <div class="subhead small-caps" id="code">
             <a href="#code">code</a>
         </div>
-        <pre class="prettyprint lang-c" background-color=#000>#define NORTH 1
+        <pre class="prettyprint lang-c" background-color=#000>#define OFF   0
+#define NORTH 1
 #define SOUTH 2
-#define OFF 0
+
+// globals
+int s_delay=5000;     // step delay in micros
 
 void setup() {
-  // Coil A:
-  pinMode(12,OUTPUT);  //Dir
-  pinMode(3,OUTPUT);  // On/Off
-  pinMode(9,OUTPUT); // Brake
+  // coil A
+  pinMode(12,OUTPUT); // direction
+  pinMode(3,OUTPUT);  // on/off
+  pinMode(9,OUTPUT);  // brake
 
-  // Coil B:
+  // coil B
   pinMode(13,OUTPUT);
   pinMode(11,OUTPUT);
   pinMode(8,OUTPUT);
@@ -130,111 +133,113 @@ void setup() {
   Serial.begin(115200);
 }
 
-float iA=0, iB=0;
-double t0, t;
-int ct=0;  nju
-int t_d=5000;
-
 void loop() {
-  t0 = micros();
+  // init step and time counters
+  int step;
+  double t0 = micros();
   
-  for (ct=1;ct<=300;ct++) {  // 50 1 rev ; 100 2 rev
-    back();
-    iA = float(analogRead(0)) /1023.0*5.0 / 1.65 * 1000.0;
-    iB = float(analogRead(1)) /1023.0*5.0 / 1.65 * 1000.0;
-    Serial.println(String((micros()-t0)/1000000)
-                   +"\t"
-                   +String(ct*4)
-                   +"\t"
-                   +String(iA)
-                   +"\t"
-                   +String(iB)
-    );
+  // 50 steps per 1 revolution
+  for (step=0;step<=300;step++) {  
+    towards();
+    readout(t0,step);
   }
   
-  for (ct=1;ct<=300;ct++) {
-    forward();
-    iA= float(analogRead(0)) /1023.0*5.0 / 1.65 * 1000.0;
-    iB= float(analogRead(1)) /1023.0*5.0 / 1.65 * 1000.0;
-    Serial.print(String((micros()-t0)/1000000)+"\t"+String(ct*4));
-    Serial.print("\t");
-    Serial.print(iA);
-    Serial.print("\t");
-    Serial.println(iB);
+  for (step=0;step<=300;step++) {
+    away();
+    readout(t0,step);
   }
   
-  shutdown();
-  while(1); 
+  shutdown(); // turn off all
+  while(1);   // hold until reset
+}
+
+// away from stepper
+void away() {
+  coilA(NORTH);
+  coilB(OFF);
+  delayMicroseconds(s_delay);
+  coilA(OFF);
+  coilB(NORTH);
+  delayMicroseconds(s_delay);
+  coilA(SOUTH);
+  coilB(OFF);
+  delayMicroseconds(s_delay);
+  coilA(OFF);
+  coilB(SOUTH);
+  delayMicroseconds(s_delay);
+  coilA(NORTH);
+  coilB(OFF);
+  delayMicroseconds(s_delay);
+}
+
+// towards stepper
+void towards() {
+  coilA(OFF);
+  coilB(NORTH);
+  delayMicroseconds(s_delay);
+  coilA(NORTH);
+  coilB(OFF);
+  delayMicroseconds(s_delay);
+  coilA(OFF);
+  coilB(SOUTH);
+  delayMicroseconds(s_delay);
+  coilA(SOUTH);
+  coilB(OFF);
+  delayMicroseconds(s_delay);
+  coilA(OFF);
+  coilB(NORTH);
+  delayMicroseconds(s_delay);
 }
 
 void coilA(int polarity) {
-  digitalWrite(9,LOW); //takes off break
+  digitalWrite(9,LOW);
   if (polarity == NORTH) {
     digitalWrite(12,HIGH);
-    digitalWrite(3,HIGH); //Enable coil
+    digitalWrite(3,HIGH);
   }
   if (polarity == SOUTH) {
     digitalWrite(12,LOW);
-    digitalWrite(3,HIGH); //Enable coil
+    digitalWrite(3,HIGH);
   }
   if (polarity == OFF) {
     digitalWrite(12,LOW);
-    digitalWrite(3,LOW); //Enable coil
+    digitalWrite(3,LOW);
   }
 }
 
 void coilB(int polarity) {
-  digitalWrite(8,LOW); //takes off break
+  digitalWrite(8,LOW);
   if (polarity == NORTH) {
     digitalWrite(13,HIGH);
-    digitalWrite(11,HIGH); //Enable coil
+    digitalWrite(11,HIGH);
   }
   if (polarity == SOUTH) {
     digitalWrite(13,LOW);
-    digitalWrite(11,HIGH); //Enable coil
+    digitalWrite(11,HIGH);
   }
   if (polarity == OFF) {
     digitalWrite(13,LOW);
-    digitalWrite(11,LOW); //Enable coil
+    digitalWrite(11,LOW);
   }
 }
 
-void forward() {
-  coilA(NORTH);
-  coilB(OFF);
-  delayMicroseconds(t_d);
-  coilA(OFF);
-  coilB(NORTH);
-  delayMicroseconds(t_d);
-  coilA(SOUTH);
-  coilB(OFF);
-  delayMicroseconds(t_d);
-  coilA(OFF);
-  coilB(SOUTH);
-  delayMicroseconds(t_d);
-  coilA(NORTH);
-  coilB(OFF);
-  delayMicroseconds(t_d);
+// measures current in A & B
+// prints time, step #, and current
+void readout(double t0, int step) {
+  float i_A = float(analogRead(0)) / 1023.0 * 5.0 / 1.65 * 1000.0,
+        i_B = float(analogRead(1)) / 1023.0 * 5.0 / 1.65 * 1000.0;
+  Serial.println(
+    String((micros()-t0)/1000000)
+    +"\t"
+    +String(step*4)
+    +"\t"
+    +String(i_A)
+    +"\t"
+    +String(i_B)
+  );
 }
 
-void back() {
-  coilA(OFF);
-  coilB(NORTH);
-  delayMicroseconds(t_d); // 2000 is the impulse width 6000 longer than 2000
-  coilA(NORTH);
-  coilB(OFF);
-  delayMicroseconds(t_d);
-  coilA(OFF);
-  coilB(SOUTH);
-  delayMicroseconds(t_d);
-  coilA(SOUTH);
-  coilB(OFF);
-  delayMicroseconds(t_d);
-  coilA(OFF);
-  coilB(NORTH);
-  delayMicroseconds(t_d);
-}
-
+// turn all off
 void shutdown() {
   digitalWrite (12,LOW);
   digitalWrite (3,LOW);
