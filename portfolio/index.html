@@ -66,7 +66,7 @@
             </p>
         <div class="subhead small-caps" id="code">
             <a href="#code">Code</a></div>
-            <pre><code>/* Zachary Weiss
+            <pre>/* Zachary Weiss
 ** 26 Sept 2020
 ** Linear Rail Full & Half Step for ME460 */
 #define OFF   0
@@ -123,6 +123,7 @@ void loop() {
     // while switch is unpressed and count is below safety margin
     while(digitalRead(10) && step<1.2*stepmax){
       towards(step,t0);
+      step++;
     }
     for (step=0;step<=stepmax;step++) {  
       away(step,t0);
@@ -132,6 +133,7 @@ void loop() {
   if (steptype==HALF) {
     while(digitalRead(10) && step<1.2*stepmax){
       towardsHalf(step,t0);
+      step++;
     }
     for (step=0;step<=stepmax;step++) {  
       awayHalf(step,t0);
@@ -322,7 +324,7 @@ void shutdown() {
   digitalWrite (13,LOW);
   digitalWrite (11,LOW);
   digitalWrite (8,LOW);
-}</code></pre>
+}</pre>
             <p>
                 Both the full and half step code are within this program, switching achieved by setting the global flag to either FULL or HALF. Serial readout is tab-delineated, of the format: time [s], steps, current in coil A [mA], coil in current B [mA].
             </p>
