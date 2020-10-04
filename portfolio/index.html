@@ -333,7 +333,7 @@ void shutdown() {
   digitalWrite (8,LOW);
 }</code></pre>
             <p>
-                Both the full and half step code are within this program, switching achieved by setting the global flag to either FULL or HALF. Serial readout is tab-delineated, of the format: time [s], steps, current in coil A [mA], coil in current B [mA].
+                Both the full and half step code are within this program, switching achieved by setting the global flag <code>steptype</code> to either <code>FULL</code> or <code>HALF</code>. Serial readout is tab-delineated, of the format: time [s], steps, current in coil A [mA], coil in current B [mA].
             </p>
         <div class="subhead small-caps" id="tests">
             <a href="#tests">Test procedure</a></div>
