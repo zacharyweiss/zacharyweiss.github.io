@@ -23,8 +23,9 @@ html {
 	}
 }*/
 
-@media all and (min-width:520px) { html { $fsize: 24px; } }
-@media all and (max-width:520px) { html { $fsize: 18px; } }
+$fsize: 60px;
+@media all and (min-width:520px) { $fsize: 24px; }
+@media all and (max-width:520px) { $fsize: 18px; }
 html {
 	font-size: $fsize;
 }
