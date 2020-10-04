@@ -68,7 +68,7 @@ div#content {
 pre {
 	margin-bottom: 0.75rem
 }
-pre code {
+code {
     display: block; 
     background-color: #eee
     font-family: monospace;
