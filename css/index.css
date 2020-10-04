@@ -67,9 +67,9 @@ pre code {
 }
 
 .footer {
-	padding-top: 2em;
+	padding-top: 4em;
 }
-.footer > p{
+div.footer > p{
 	padding: 0;
 }
 
