@@ -19,6 +19,9 @@
             padding-bottom: 0.2em;
             padding-top: 0.2em;
         }
+        html[theme='dark-mode'] {
+            filter: invert(1) hue-rotate(180deg);
+        }
     </style>
 	<!--Favicons-->
 	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
@@ -39,7 +42,7 @@
                 The goal of this design project is to build a linear stage with open-loop control, capable of moving 0.5kg to predefined locations along its path. This report is divided into eight sections: the <a href="#work">Work Description</a>, <a href="#principles">Principles of Operation</a>, <a href="#construction">Mechanical Construction</a>, <a href="#circuitry">Circuitry</a>, <a href="#code">Code</a>, <a href="#tests">Test Procedure</a>, <a href="#results">Test Results</a>, and <a href="#motion">Loaded Motion Cycle</a>. The above can be used as a table of contents by clicking the desired section.
             </p>
             <p>
-                Work was largely organized in the same fashion as the report's heirarchy; the rails were assembled as described in the <a href="#construction">mechanical construction</a> section and code was written for initial testing (described in the <a href="#code">code</a> and <a href="#tests">test procedure</a> / <a href="#results">results</a> sections). This was followed with the implementation of a limit switch&mdash;wired in as per the <a href="#circuitry">circuitry</a> section, and the code modified accordingly. Finally, the video of the <a href="#motion">stage in motion</a> was produced, integrating all prior work and demonstrating stage capability meeting that which was set out within the goals.
+                Work was largely organized in the same fashion as the report's heirarchy; the rails were assembled as described in the <a href="#construction">mechanical construction</a> section and code was written for initial testing (described in the <a href="#code">code</a> and <a href="#tests">test procedure</a> / <a href="#results">results</a> sections). This was followed with the implementation of a limit switch&mdash;wired in as per the <a href="#circuitry">circuitry</a> section, and the code modified accordingly. Finally, the video of the <a href="#motion">stage in motion</a> was produced, integrating all prior work and demonstrating functionality meeting that which was set out within the goals.
             </p>
         <div class="subhead small-caps" id="principles">
             <a href="#principles">Principles of operation</a></div>
