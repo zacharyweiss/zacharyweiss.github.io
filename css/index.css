@@ -23,11 +23,11 @@ html {
 	}
 }*/
 
-$fsize: 60px;
-@media all and (min-width:520px) { $fsize: 24px; }
-@media all and (max-width:520px) { $fsize: 18px; }
+--fsize: 60px;
+@media all and (min-width:520px) { --fsize: 24px; }
+@media all and (max-width:520px) { --fsize: 18px; }
 html {
-	font-size: $fsize;
+	font-size: --fsize;
 }
 
 body {
@@ -88,7 +88,7 @@ pre code {
 p code {
     font-family: monospace;
     font-size: 16px;
-    font-size: calc(100%*0.75));
+    font-size: calc(var(--fsize) * 0.75));
 }
 
 .footer {
