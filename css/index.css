@@ -75,7 +75,7 @@ pre {
 pre code {
     display: block; 
     background-color: #f4f5f6;
-    border: 1px #eee;
+    border: 2px #eee;
     font-family: monospace;
     font-size: 12px; 			/*TODO: Fix variable sizing*/
     padding: 15px;
