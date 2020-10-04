@@ -27,7 +27,7 @@ html {
 @media all and (min-width:520px) { root{ --fsize: 24px; } }
 @media all and (max-width:520px) { root{ --fsize: 18px; } }
 html {
-	font-size: --fsize;
+	font-size: var(--fsize);
 }
 
 body {
