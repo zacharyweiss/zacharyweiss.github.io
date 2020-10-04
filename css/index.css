@@ -88,7 +88,7 @@ pre code {
 p code {
     font-family: monospace;
     font-size: 16px;
-    font-size: calc(var(--fsize) * 0.9));
+    font-size: calc(var(--fsize) * 0.9))px;
 }
 
 .footer {
