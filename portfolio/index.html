@@ -44,20 +44,23 @@
 		<div class="subhead small-caps" id="work">
             <a href="#work">Work description</a></div>
             <p>
-                The goal of this design project is to build a linear stage with open-loop control, capable of moving 0.5kg to predefined locations along its path. This report is divided into eight sections: the <a href="#work">Work Description</a>, <a href="#principles">Principles of Operation</a>, <a href="#construction">Mechanical Construction</a>, <a href="#circuitry">Circuitry</a>, <a href="#code">Code</a>, <a href="#tests">Test Procedure</a>, <a href="#results">Test Results</a>, and <a href="#motion">Loaded Motion Cycle</a>. The above can be used as a table of contents by clicking the desired section.
+              The goal of this design project is to build a linear stage with open-loop control, capable of moving 0.5kg to predefined locations along its path. This report is divided into eight sections: the <a href="#work">Work Description</a>, <a href="#principles">Principles of Operation</a>, <a href="#construction">Mechanical Construction</a>, <a href="#circuitry">Circuitry</a>, <a href="#code">Code</a>, <a href="#tests">Test Procedure</a>, <a href="#results">Test Results</a>, and <a href="#motion">Loaded Motion Cycle</a>. The above can be used as a table of contents by clicking the desired section.
             </p>
             <p>
-                Work was largely organized in the same fashion as the report's heirarchy; the rails were assembled as described in the <a href="#construction">mechanical construction</a> section and code was written for initial testing (described in the <a href="#code">code</a> and <a href="#tests">test procedure</a> / <a href="#results">results</a> sections). This was followed with the implementation of a limit switch&mdash;wired in as per the <a href="#circuitry">circuitry</a> section, and the code modified accordingly. Finally, the video of the <a href="#motion">stage in motion</a> was produced, integrating all prior work and demonstrating functionality meeting that which was set out within the goals.
+              Work was largely organized in the same fashion as the report's heirarchy; the rails were assembled as described in the <a href="#construction">mechanical construction</a> section and code was written for initial testing (described in the <a href="#code">code</a> and <a href="#tests">test procedure</a> / <a href="#results">results</a> sections). This was followed with the implementation of a limit switch&mdash;wired in as per the <a href="#circuitry">circuitry</a> section, and the code modified accordingly. Finally, the video of the <a href="#motion">stage in motion</a> was produced, integrating all prior work and demonstrating functionality meeting that which was set out within the goals.
             </p>
         <div class="subhead small-caps" id="principles">
             <a href="#principles">Principles of operation</a></div>
             <p>
-                
+              A linear stage consists of a few key elements: the rails, screw, and motor. A stage is placed upon guide blocks on the rail, and connected to a nut on the lead screw. As such, when the screw is turned by the stepper motor, screw converts the rotational motion of the motor into linear translation along the axis of the rails, and subsequently pulls the stage along.
+            </p>
+            <p>
+              The stepper motor itself functions by the periodic polarization of patterned electromagnets, in a sequence that pulls the rotor about a full rotation in discrete steps. In this project, the sequencing of polarization is controlled via an arduino with a motor shield, running the code outlined below. In the full-step regime, coils within the motor are polarized one at a time, with the step resolution limited to the number of times the coils are patterned. In the half-step regime, this step resolution is doubled by energizing more than one coil at a time, transiently pulling the rotor to positions between coils as additional "steps".
             </p>
         <div class="subhead small-caps" id="construction">
             <a href="#construction">Mechanical construction</a></div>
             <p>
-                
+              To construct the stage, I began by 
             </p>
         <div class="subhead small-caps" id="circuitry">
             <a href="#circuitry">Circuitry</a></div>
@@ -358,7 +361,6 @@ void shutdown() {
             <div class="videodiv"><iframe src="https://www.youtube-nocookie.com/embed/DrpjgVJvdvU?modestrbranding=1&title=&showinfo=0&controls=0&mute=1&rel=0&fs=0&disablekb=1" frameborder="0" allow="accelerometer; encrypted-media; gyroscope;" class="video"></iframe></div>
         <div class=footer>
             <p>Zachary Weiss<br/>4 October 2020</p>
-            <p>test</p>
         </div>
 	</div>
 </div>
