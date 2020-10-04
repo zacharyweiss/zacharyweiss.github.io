@@ -8,8 +8,10 @@ html {
 	height: 100%;
 }
 
+/*Janky darkmode test*/
+/*
 @media (prefers-color-scheme: dark) { 
-	html:not(img):not(.video) {
+	html {
 		filter: invert(1) hue-rotate(180deg);
 		background: #121212;
 	} 
@@ -19,7 +21,7 @@ html {
 	html .video {
 		filter: invert(1) hue-rotate(180deg);
 	}
-}
+}*/
 
 @media all and (min-width:520px) { html { font-size: 24px; } }
 @media all and (max-width:520px) { html { font-size: 18px; } }
@@ -102,7 +104,7 @@ div.footer > p{
 
 topic {
 	display: block;
-	font-family: inherit;/*"advocate-c41";*/
+	font-family: inherit;
 	font-size: 2.3rem; text-transform: uppercase;
 	font-style: normal;
 	line-height: 1.1;
