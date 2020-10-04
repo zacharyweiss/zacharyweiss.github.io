@@ -66,20 +66,22 @@ div#content {
 }
 
 pre {
-	margin-bottom: 0.75rem
-}
-code {
+	margin-bottom: 0.75rem;
     display: block; 
-    background-color: #eee
-    font-family: monospace;
-    font-size: 12px; 			/*TODO: Fix variable sizing*/
     border: 2px solid #eee;
     padding: 15px;
     white-space: pre-wrap;      /* Since CSS 2.1 */
     white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
     white-space: -pre-wrap;     /* Opera 4-6 */
     white-space: -o-pre-wrap;   /* Opera 7 */
-    word-wrap: break-word;      /* Internet Explorer 5.5+ */
+    word-wrap: break-word;  /* Internet Explorer 5.5+ */
+}
+code {
+
+    background-color: #eee
+    font-family: monospace;
+    font-size: 12px; 			/*TODO: Fix variable sizing*/
+
 }
 
 .footer {
