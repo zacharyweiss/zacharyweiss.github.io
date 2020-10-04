@@ -74,10 +74,9 @@ pre {
 }
 pre code {
     display: block; 
-    background-color: #eee;
+    background-color: #f4f5f6;
     font-family: monospace;
     font-size: 12px; 			/*TODO: Fix variable sizing*/
-    border: 2px solid #eee;
     padding: 15px;
     white-space: pre-wrap;      /* Since CSS 2.1 */
     white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
