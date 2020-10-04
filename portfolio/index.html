@@ -32,17 +32,22 @@
 <body id="body" class="body-text_equity" body-text="true">
 <div id="content">
 	<div id="doc">
-		<topic class="small">Linear Rail Code and Data (Intermediate Deliverables)</topic>
-		<p>Below are the intermediate deliverables for <i>Design Project #1</i> of ME460; this page will be updated with a full writeup for the Wednesday deliverables.        
-        </p>
-        <!--<video src="video/linearrail.mp4" width=inherit controls=false muted=true/>-->
-        <div class="videodiv"><iframe src="https://www.youtube-nocookie.com/embed/DrpjgVJvdvU?modestrbranding=1&title=&showinfo=0&controls=0&mute=1&rel=0&fs=0&disablekb=1" frameborder="0" allow="accelerometer; encrypted-media; gyroscope;" class="video"></iframe></div>
+		<topic class="small">ME460 DP1: Linear Stage</topic>
+        <p>The goal of this design project is to build a linear stage with open-loop control, capable of moving 0.5kg to predefined locations along its path. This report is divided into eight sections: the <a href="#work">Work description</a>, <a href="#principles">Principles of operation</a>, <a href="#construction">Mechanical construction</a>, <a href="#circuitry">Circuitry</a>, <a href="#code">Code</a>, <a href="#tests">Test procedure</a>, <a href="#results">Test results</a>, and <a href="#motion">Loaded motion cycle</a>. The above can be used as a table of contents by clicking the desired section.
+
+		<div class="subhead small-caps" id="work">
+            <a href="#work">Work description</a></div>
+        <div class="subhead small-caps" id="principles">
+            <a href="#principles">Principles of operation</a></div>
+        <div class="subhead small-caps" id="construction">
+            <a href="#construction">Mechanical construction</a></div>
+        <div class="subhead small-caps" id="circuitry">
+            <a href="#circuitry">Circuitry</a></div>
         <div class="subhead small-caps" id="code">
-            <a href="#code">code</a>
-        </div>
+            <a href="#code">Code</a></div>
 <pre><code>/* Zachary Weiss
 ** 26 Sept 2020
-** Linear Rail Full&Half Step for ME460 */
+** Linear Rail Full & Half Step for ME460 */
 #define OFF   0
 #define NORTH 1
 #define SOUTH 2
@@ -66,16 +71,26 @@ void setup() {
   pinMode(11,OUTPUT);
   pinMode(8,OUTPUT);
 
+  // limit switch
+  pinMode(10,INPUT_PULLUP);
+
   shutdown();
 
   Serial.begin(115200);
+
+  // wait for user input to begin
+  while(digitalRead(10));
+  // allow time for button to be released, else will skip
+  // first step of movement sequence that waits for
+  // the limit switch to trigger
+  delay(200);
 }
 
 void loop() {
   // init step and time counters,
   // define max distance in steps
-  int step,
-      stepmax = 300;
+  int step = 0,
+      stepmax = 1200;
   double t0 = micros();
   
   // print which regime we're operating in, to contextualize
@@ -84,20 +99,21 @@ void loop() {
 
   if (steptype==FULL) {
     // 50 steps per 1 revolution
+    // while switch is unpressed and count is below safety margin
+    while(digitalRead(10) && step<1.2*stepmax){
+      towards(step,t0);
+    }
     for (step=0;step<=stepmax;step++) {  
       away(step,t0);
-    }
-    for (step=0;step<=stepmax;step++) {
-      towards(step,t0);
     }
   }
   
   if (steptype==HALF) {
+    while(digitalRead(10) && step<1.2*stepmax){
+      towardsHalf(step,t0);
+    }
     for (step=0;step<=stepmax;step++) {  
       awayHalf(step,t0);
-    }
-    for (step=0;step<=stepmax;step++) {
-      towardsHalf(step,t0);
     }
   }
   
@@ -272,6 +288,7 @@ int readout(double t0, int s, int ss) {
     +"\t"
     +String(i_B)
   );
+  // increment substep
   ss+=1;
   return ss;
 }
@@ -286,12 +303,17 @@ void shutdown() {
   digitalWrite (8,LOW);
 }</code></pre>
         <p>Both the full and half step code are within this program, switching achieved by setting the global flag to either FULL or HALF. Serial readout is tab-delineated, of the format: time [s], steps, current in coil A [mA], coil in current B [mA].</p>
-		<div class="subhead small-caps" id="data">
-			<a href="#data">data</a>
-		</div>
+        <div class="subhead small-caps" id="tests">
+            <a href="#tests">Test procedure</a></div>
+        <div class="subhead small-caps" id="results">
+            <a href="#results">Test results</a></div>
         <img src="/img/AngularDisplacementVSTime.PNG" id="angDisp" alt="Angular displacement vs. time"/>
         <img src="/img/iHalfVSTime.PNG" id="iHalf" alt="Current in coils A and B over time in halfstep regime."/>
         <img src="/img/iFullVSTime.PNG" id="iFull" alt="Current in coils A and B over time in fullstep regime."/>
+        <div class="subhead small-caps" id="motion">
+            <a href="#motion">Loaded motion cycle</a></div>
+        <div class="videodiv"><iframe src="https://www.youtube-nocookie.com/embed/DrpjgVJvdvU?modestrbranding=1&title=&showinfo=0&controls=0&mute=1&rel=0&fs=0&disablekb=1" frameborder="0" allow="accelerometer; encrypted-media; gyroscope;" class="video"></iframe></div>
+        <p>Above pictured is the linear stage carrying a Mason jar, weighing in at 0.8kg. The program is triggered by an initial press of the limit switch, travels until hitting the aforementioned switch, and returning to its home position.</p>
 	</div>
 </div>
 </body>
