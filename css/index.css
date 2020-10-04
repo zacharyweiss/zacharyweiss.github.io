@@ -66,6 +66,13 @@ pre code {
     word-wrap: break-word;      /* Internet Explorer 5.5+ */
 }
 
+.footer {
+	padding-top: 2em;
+}
+.footer > p{
+	padding: 0;
+}
+
 .videodiv {
     position: relative;
     width: 100%;
