@@ -336,34 +336,34 @@ void shutdown() {
               Both the full and half step code are within this program, switching achieved by setting the global flag <code>steptype</code> to either <code>FULL</code> or <code>HALF</code>. Serial readout is tab-delineated, of the format: time [s], steps, current in coil A [mA], coil in current B [mA].
             </p>
             <p>
-              The broad strokes of the program are: <code>setup()</code> defines the pin inputs, turns everything off, and waits for user input with the switch. The <code>loop()</code> intitializes a step counter, defines a maximum step count, and records the start time, before calling the movement functions <code>forward()</code>&hairsp;and&thinsp;<code>back()</code>&mdash;or their halfstep variants&mdash;repeatedly until the limit switch or the stepcount max is hit, directional dependantly. The movement functions take the arguments of the start time and current step, for ease of data printing later, and iterate through one cycle of the coil polarity sequence, calling <code>readout()</code> at each sub-step, a custom defined function that prints the above-stated serial readout. The <code>coilA()</code> and <code>coilB()</code> functions simply serve to convert a passed polarity argument into the pin <code>HIGH</code>/<code>LOW</code> values the motor shield expects for each given polarity. Comments in the code above explain each function to a greater depth.
+              The broad strokes of the program are: <code>setup()</code> defines the pin inputs, turns everything off, and waits for user input with the switch. The <code>loop()</code> intitializes a step counter, defines a maximum step count, and records the start time, before calling the movement functions <code>forward()</code>&hairsp;and <code>back()</code>&mdash;or their halfstep variants&mdash;repeatedly until the limit switch or the stepcount max is hit, directional dependantly. The movement functions take the arguments of the start time and current step, for ease of data printing later, and iterate through one cycle of the coil polarity sequence, calling <code>readout()</code> at each sub-step, a custom defined function that prints the above-stated serial readout. The <code>coilA()</code> and <code>coilB()</code> functions simply serve to convert a passed polarity argument into the pin <code>HIGH</code>/<code>LOW</code> values the motor shield expects for each given polarity. Comments in the code above explain each function to a greater depth.
             </p>
         <div class="subhead small-caps" id="tests">
             <a href="#tests">Test procedure</a></div>
             <p>
-                
+              The testing deliverables were: angular displacement over time for the full- and half-step regimes, half-step coil currents, and full-step coil currents. The code above, via the <code>readout()</code> function, prints the data required to plot these three deliverables. Within <code>readout()</code>, the current was calculated by the equation <code>i = voltage / 1023.0 * 5.0 / 1.65 * 1000.0</code>, where <code>1023</code> is the maximum integer value the <code>analogRead()</code> of the voltage can take on, the <code>5</code> maps that pin value back to a voltage on the scale of 0&ndash;5V, the <code>1.65</code> converts the mapped voltage to a current based on internal resistances, and the <code>1000.0</code> brings the units to milliamps.
             </p>
         <div class="subhead small-caps" id="results">
             <a href="#results">Test results</a></div>
             <p>
-                
+              The aforementioned readouts copied from serial monitor and plotted via Microsoft Excel.
             </p>
             <img src="/img/AngularDisplacementVSTime.PNG" id="angDisp" alt="Angular displacement vs. time"/>
             <p>
-                
+              Above is the results of the angular displacement over time test, with a substep delay interval of 2000&mu;s for the full-step regime, plotted in blue, and an interval of 1000&mu;s for the half-step regime, plotted in orange.
             </p>
             <img src="/img/iHalfVSTime.PNG" id="iHalf" alt="Current in coils A and B over time in halfstep regime."/>
             <p>
-                
+              Pictured: currents by coil in the half-step regime, over the same homing sequence seen in the angular displacement over time graph, with coil A in blue, and coil B in orange.
             </p>
             <img src="/img/iFullVSTime.PNG" id="iFull" alt="Current in coils A and B over time in fullstep regime."/>
             <p>
-                
+              Pictured: currents by coil in the full-step regime, over the same homing sequence seen in the angular displacement over time graph, with coil A in blue, and coil B in orange.
             </p>
         <div class="subhead small-caps" id="motion">
             <a href="#motion">Loaded motion cycle</a></div>
             <p>
-                Below pictured is the linear stage carrying a Mason jar, weighing in at 0.8kg. The program is triggered by an initial press of the limit switch, travels until hitting the aforementioned switch, and returning to its home position.
+                Below is a recording of the linear stage carrying a partially-filled Mason jar weighing in at 0.8kg. The program is triggered by an initial press of the limit switch, travels until hitting the aforementioned switch, and returning to its home position.
             </p>
             <div class="videodiv"><iframe src="https://www.youtube-nocookie.com/embed/DrpjgVJvdvU?modestrbranding=1&title=&showinfo=0&controls=0&mute=1&rel=0&fs=0&disablekb=1" frameborder="0" allow="accelerometer; encrypted-media; gyroscope;" class="video"></iframe></div>
         <div class=footer>
