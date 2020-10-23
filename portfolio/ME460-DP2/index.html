@@ -61,7 +61,7 @@
     <div class="subhead small-caps" id="control">
       <a href="#control">Control Algorithm</a></div>
       <p>
-        PID control is the most rudimentary of control schemas, easily being implemented on the lowest computing power microcontrollers, or even in a fully analog fashion. It consists of three terms: the proportional, integrative, and derivative control terms. Each takes an error signal, and by some tuned coefficient, feeds a response back into the system, seeking to minimize the error. In the proportional term, the error is simply the difference between the target value and the current value. In the integrative term, accumulated proportional error over time is considered, with proportional error that has lingered for longer having a higher weight; this is most useful in reducing residual error. In the derivative term, it considers the rate at which the proportional error is changing, most useful for preventing overshoot of a target value.
+        PID control is the most rudimentary of control schemas, easily implemented on the smallest microcontrollers, or even in a fully analog fashion. It consists of three terms: the proportional, integrative, and derivative control terms. Each takes an error signal, and by some tuned coefficient, feeds a response back into the system, seeking to minimize the error. In the proportional term, the error is simply the difference between the target value and the current value. In the integrative term, accumulated proportional error over time is considered, with proportional error that has lingered for longer having a higher weight; this is most useful in reducing residual error. In the derivative term, it considers the rate at which the proportional error is changing, most useful for preventing overshoot of a target value.
       </p>
       <p>
         This project&rsquo;s deliverables simply called for proportional control, but due to significant observed overshoot at proportional coefficient values that avoided significant system lag, especially from a stopped state, I decided to implement a simple derivative control term as well, which can be enabled or disabled by use of the global flag <code>use_deriv</code> within the code. The implementation of this schema into code is as follows.
@@ -219,11 +219,15 @@ void shutdown() {
     <div class="subhead small-caps" id="results">
       <a href="#results">Test results</a></div>
       <p>
-        The aforementioned readouts copied from serial monitor and plotted via Microsoft Excel.
+        The aforementioned Serial monitor readouts from the homing sequence were parsed and plotted within Excel to produce the following results.
       </p>
-      <img src="/img/AngularDisplacementVSTime.PNG" id="angDisp" alt="Angular displacement vs. time"/>
+      <img src="/img/ME460-DP1/disp.png" id="linDisp" alt="Plot of linear displacement vs. time"/>
       <p>
-        Above is the results of the angular displacement over time test, with a substep delay interval of 2000&mu;s for the full-step regime, plotted in blue, and an interval of 1000&mu;s for the half-step regime, plotted in orange.
+        Above is the linear displacement over time. Zero is the home position of the platform (30mm away from the motor and limit switch), with the positive direction towards the motor, and the negative direction away.
+      </p>
+      <img src="/img/ME460-DP1/vel.png" id="linVel" alt="Plot of linear speed vs. time"/>
+      <p>
+        Above is the absolute linear speed of the carraige (directionality of velocity not represented). Within the plot, there are two evident outlying points: the first sudden dip is likely a measurement / weak wiring connection; the second is likely a result of insufficient measurement frequency, as new readings are only made every tenth of a second (and velocity must drop to zero and back up each time the carriage switches direction), the same rate at which the applied motor voltage is recalculated. The minor overshoot, and the damping of the derivative term is evident most clearly in the final part of the regime, from 4 seconds onward, where it oscillates slightly about the target speed of 10mm/s.
       </p>
     <div class="subhead small-caps" id="motion">
       <a href="#motion">Loaded motion cycle</a></div>
