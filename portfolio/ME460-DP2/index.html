@@ -53,7 +53,7 @@
         Above pictured is the wiring schema for the limit switch and DC motor. The mini-breadboard at the top is symbolic of the motor shield; it recieves external power, the motor negative and positive are wired in, and controlling signals are provided via pins <code>3</code>, <code>9</code>, and <code>12</code> (connected via the shield, as represented by the grey wires). Ground is common across the shield and Arduino. The encoder wires directly into pins <code>2</code> and <code>7</code>, as well as the Arduino <code>5V</code> and <code>GND</code> supplies.
       </p>
       <p>
-        The limit switch is wired in in the same fasion as in <a href="/portfolio/ME460-DP1">Design Project #1</a>: a 10k&#8486; pull-up resistor is connected to the Arduino&rsquo;s <code>5V</code> power, and then split back to digital pin ten and to ground through the switch. Given this: when the switch is depressed, the pin will read <code>LOW</code>, when released, it will read <code>HIGH</code>. 
+        The limit switch is wired in in the same fasion as in <a href="/portfolio/ME460-DP1">Design Project #1</a>: a 10k&#8486; pull-up resistor is connected to the Arduino&rsquo;s <code>5V</code> power, and then split back to digital pin <code>10</code> and to <code>GND</code> through the switch. Given this: when the switch is depressed, the pin will read <code>LOW</code>, when released, it will read <code>HIGH</code>. 
       </p>
       <p>
         All other circuitry is internal to the motor shield and Arduino.
@@ -76,15 +76,15 @@
 // global settings and flags
 // k_prop is coeff for proportional term
 // k_deriv is coeff for derivative term
-double k_prop     = 0.2,
-       k_deriv    = 0.1;
-int    use_deriv  =   1, // flag
-       targetSpd1 =  35, // mm per s
-       targetSpd2 =  20,
-       targetSpd3 =   6, // slowest speed possible
-       targetSpd4 =  10,
-       dist2      =  20, // mm
-       dist4      =  60;
+double k_prop     =  0.2,
+       k_deriv    =  0.1;
+bool   use_deriv  = true; // flag
+int    targetSpd1 =   35, // mm per s
+       targetSpd2 =   20,
+       targetSpd3 =    6, // slowest speed possible
+       targetSpd4 =   10,
+       dist2      =   20, // mm
+       dist4      =   60;
 
 // global vars
 volatile long int pulses = 0;
@@ -110,7 +110,7 @@ void setup() {
 
     digitalWrite(3,LOW);   // Motor off
     digitalWrite(9,LOW);   // Disable brake
-    digitalWrite(12,HIGH); // Set direction
+    digitalWrite(12,LOW);  // Set direction
 
     while(digitalRead(10)); // wait for user input
     delay(1000); // wait one second before beginning sequence
@@ -171,7 +171,7 @@ void setSpeed(double target_rpm) {
     +String(pulses));
 
   err = target_rpm - current_rpm;
-  // only calculate d_err if use_deriv is 1, else 0
+  // only calculate d_err if use_deriv is true, else 0
   d_err = use_deriv?(err - err_old):0;
   v_motor += k_prop*err + k_deriv*d_err;
   err_old = err;
@@ -211,10 +211,10 @@ void shutdown() {
   digitalWrite(12,LOW);
 }</code></pre>
       <p>
-        Both the full and half step code are within this program, switching achieved by setting the global flag <code>steptype</code> to either <code>FULL</code> or <code>HALF</code>. Serial readout is tab-delineated, of the format: time [s], steps, current in coil A [mA], coil in current B [mA].
+        As mentioned in the <a href="#control">control algorithm</a> section, derivative control can be turned on and off by setting the global flag <code>use_deriv</code> to either <code>true</code> or <code>false</code>. Serial readout is tab-delineated, of the format: time [ms], motor voltage output [0-255], current speed [rpm], and encoder pulses. There are 374 pulses of the encoder per rotation, and the lead screw&rsquo;s pitch is 8mm.
       </p>
       <p>
-        The broad strokes of the program are: <code>setup()</code> defines the pin inputs, turns everything off, and waits for user input with the switch. The <code>loop()</code> intitializes a step counter, defines a maximum step count, and records the start time, before calling the movement functions <code>forward()</code>&hairsp;and <code>back()</code>&mdash;or their halfstep variants&mdash;repeatedly until the limit switch or the stepcount max is hit, directional dependantly. The movement functions take the arguments of the start time and current step, for ease of data printing later, and iterate through one cycle of the coil polarity sequence, calling <code>readout()</code> at each sub-step, a custom defined function that prints the above-stated serial readout. The <code>coilA()</code> and <code>coilB()</code> functions simply serve to convert a passed polarity argument into the pin <code>HIGH</code>/<code>LOW</code> values the motor shield expects for each given polarity. Comments in the code above explain each function to a greater depth.
+        The broad strokes of the program are: <code>setup()</code> defines the pin inputs, turns everything off, and waits for user input with the switch, upon which there is a delay of 1s before starting the homing sequence. It additionally attachs an interrupt to pin <code>2</code>, such that pulses of the encoder may be accurated counted via the <code>count()</code> function. The <code>loop()</code> seeks to execute the homing regime of: 35mm/s towards the motor, until the limit switch is depressed, 20mm/s away from the motor for a distance of 10mm, move towards the motor once again at the slowest speed controllable (6mm/s) until the limit switch is pressed, and away once more at 10mm/s for 30mm. These speeds and distances are stored in global vars, converted via the function <code>mmToRPM()</code> into RPM, and passed to the function <code>setSpeed()</code>. The <code>setSpeed()</code> function contains the PD control logic, taking the RPM target speed, comparing it to the current speed as found by <code>getSpeed()</code>, and feeding back into <code>v_motor</code>, which is then applied to the motor via an <code>analogWrite()</code> to pin <code>3</code>. The <code>getSpeed()</code> function is passed the time for which it is to sample, records the starting pulse count, waits for the specified time, reads the ending pulse count, subtracts the two, divides by the sampling time, and applies unit conversions to return speed in RPM. Comments in the code above explain each function to a greater depth.
       </p>
     <div class="subhead small-caps" id="results">
       <a href="#results">Test results</a></div>
