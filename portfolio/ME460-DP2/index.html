@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="format-detection" content="telephone=no">
+	<link rel="preload" as="style" type="text/css" media="all" href="/fonts/equity-heavy.css">
+	<link rel="stylesheet" type="text/css" media="all" href="/fonts/equity-heavy.css">
+	<title>Portfolio: ME460 DP2</title>
+    <!--<script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>-->
+	<link rel="stylesheet" type="text/css" href="/css/index.css">
+	<style type="text/css">
+		body.hidden { opacity: 0; }
+        img {
+            /*For some reason this only works if in the head, not within index.css
+            TODO: Determine what's overriding in between...*/
+            width: 100%;
+            height: 100%;
+            padding-bottom: 0.2em;
+            padding-top: 0.2em;
+        }
+        div.footer p {
+            padding: 0;
+            /*TODO: Fix para padding in footer. Using <br> as a workaround*/
+        }
+
+    </style>
+	<!--Favicons-->
+	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+	<link rel="manifest" href="/site.webmanifest">
+	<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+	<meta name="msapplication-TileColor" content="#da532c">
+	<meta name="theme-color" content="#ffffff">
+</head>
+<body id="body" class="body-text_equity" body-text="true">
+<div id="content">
+	<div id="doc">
+		<topic class="small">ME460 Design Project #2: Closed&#8209;loop&nbsp;control</topic>
+		<div class="subhead small-caps" id="work">
+      <a href="#work">Work description</a></div>
+      <p>
+        The goal of this design project is to build a linear stage with closed-loop control, capable of moving 0.5kg to predefined locations along its path. This project builds upon the work of <a href="/porfolio/ME460-DP1">ME460 Design Project #1</a>, replacing the linear stage's stepper motor with a DC motor controled via a PD control schema. The following report is divided into eight sections: the <a href="#work">Work Description</a>, <a href="#circuitry">Circuitry</a>, <a href="#control">Control Algorithm</a>, <a href="#code">Code</a>, <a href="#results">Test Results</a>, and <a href="#motion">Loaded Motion Cycle</a>. The above can be used as a table of contents by clicking the desired section.
+      </p>
+      <p>
+        Work was largely organized in the same fashion as the report&rsquo;s heirarchy; the rails were assembled as described in the <a href="#construction">mechanical construction</a> section and code was written for initial testing (described in the <a href="#code">code</a> and <a href="#tests">test procedure</a> / <a href="#results">results</a> sections). This was followed with the implementation of a limit switch&mdash;wired in as per the <a href="#circuitry">circuitry</a> section, and the code modified accordingly. Finally, the video of the <a href="#motion">stage in motion</a> was produced, integrating all prior work and demonstrating functionality meeting that which was set out within the goals.
+        </p>
+    <div class="subhead small-caps" id="circuitry">
+      <a href="#circuitry">Circuitry</a></div>
+      <img src="/img/limitswitch.png" id="limitwire" alt="Limit switch wired into Arduino with a pull-up resistor."/>
+      <p>
+        Above pictured is the wiring schema for the limit switch. A 10k&#8486; pull-up resistor is connected to the Arduino&rsquo;s 5V power, and then split back to digital pin ten and to ground through the switch. Given this: when the switch is depressed, the pin will read <code>LOW</code>, when released, it will read <code>HIGH</code>. The only other wired component of this project is the stepper motor, which connects to the coil A/B terminals of the motor shield in a 1&#8209;to&#8209;1 fashion. All other circuitry is internal to the motor shield and Arduino.
+      </p>
+    <div class="subhead small-caps" id="code">
+      <a href="#code">Code</a></div>
+      <pre><code>/* Zachary Weiss
+** 23 Oct 2020
+** Linear Rail DC Closed-Loop Control fo ME460 */
+#define PITCH     8 // mm per rev
+#define PULSES  374 // pulses per rev
+
+// global settings and flags
+// k_prop is coeff for proportional term
+// k_deriv is coeff for derivative term
+double k_prop     = 0.2,
+       k_deriv    = 0.1;
+int    use_deriv  =   1, // flag
+       targetSpd1 =  35, // mm per s
+       targetSpd2 =  20,
+       targetSpd3 =   6, // slowest speed possible
+       targetSpd4 =  10,
+       dist2      =  20, // mm
+       dist4      =  60;
+
+// global vars
+volatile long int pulses = 0;
+double v_motor           = 0, 
+       current_rpm       = 0,
+       err               = 0,
+       err_old           = 0,
+       d_err             = 0;
+
+void setup() {
+    Serial.begin(115200);
+
+    attachInterrupt(digitalPinToInterrupt(2),count,RISING);
+    
+    pinMode(12,OUTPUT); // Dir
+    pinMode(3,OUTPUT);  // Current
+    pinMode(9,OUTPUT);  // Break
+  
+    pinMode(7,INPUT);
+
+    // limit switch
+    pinMode(10,INPUT_PULLUP);
+
+    digitalWrite(3,LOW);   // Motor off
+    digitalWrite(9,LOW);   // Disable brake
+    digitalWrite(12,HIGH); // Set direction
+
+    while(digitalRead(10)); // wait for user input
+    delay(1000); // wait one second before beginning sequence
+}
+
+void loop() {
+  int ct0 = 0;
+
+  // towards motor
+  digitalWrite(12,HIGH);
+  while(digitalRead(10)) {
+    setSpeed(mmToRPM(targetSpd1));
+  }
+
+  // away from motor
+  ct0 = pulses;
+  digitalWrite(12,LOW);
+  while((ct0-pulses)<(dist2*PULSES/PITCH)) {
+    setSpeed(mmToRPM(targetSpd2));
+  }
+  
+  digitalWrite(12,HIGH);
+  while(digitalRead(10)) {
+    setSpeed(mmToRPM(targetSpd3));
+  }
+  
+  ct0 = pulses;
+  digitalWrite(12,LOW);
+  while((ct0-pulses)<(dist4*PULSES/PITCH)) {
+    setSpeed(mmToRPM(targetSpd4));
+  }
+
+  shutdown();
+  while(digitalRead(10)); // hold until reset
+}
+
+void count() {
+  // Called on rising pulse on pin 2 (Encoder A)
+  if (digitalRead(7)==HIGH)
+    pulses--;
+  else
+    pulses++;
+}
+
+void setSpeed(double target_rpm) {
+  // Output voltage to motor, wait for response, measure new speed
+  analogWrite(3,int(v_motor));
+  delay(100);
+  current_rpm = getSpeed(100000); 
+
+  // Print time [mcs], voltage [0-255], speed [rpm], pulses
+  Serial.println(String(millis())
+    +"\t"
+    +String(int(v_motor))
+    +"\t"
+    +String(current_rpm)
+    +"\t"
+    +String(pulses));
+
+  err = target_rpm - current_rpm;
+  // only calculate d_err if use_deriv is 1, else 0
+  d_err = use_deriv?(err - err_old):0;
+  v_motor += k_prop*err + k_deriv*d_err;
+  err_old = err;
+
+  // cap voltage between 0 and 255
+  v_motor = int((v_motor>255)?255:((v_motor<0)?0:v_motor));
+}
+
+double getSpeed(long int mcs) {
+  unsigned long int t0           = 0,
+                    delta_pulses = 0;
+  // should never be neg, but to do math where the
+  // result is neg, must make signed else result will
+  // overflow, despite abs().
+  long int initialPulses         = 0;
+  double rpm                     = 0;
+  
+  initialPulses = pulses;
+  t0 = micros();
+  while(micros()-t0<mcs){} // hold for sample time
+  delta_pulses = abs(initialPulses-pulses);
+
+  rpm = double(delta_pulses)/double(mcs)*1E+6 /double(PULSES) * 60.0;
+
+  return(rpm);
+}
+
+double mmToRPM(int mmPerS) {
+  // converts mm/s to RPM
+  double rpm = mmPerS*60/PITCH;
+  return(rpm);
+}
+
+void shutdown() {
+  digitalWrite(3,LOW);
+  digitalWrite(9,LOW);
+  digitalWrite(12,LOW);
+}</code></pre>
+      <p>
+        Both the full and half step code are within this program, switching achieved by setting the global flag <code>steptype</code> to either <code>FULL</code> or <code>HALF</code>. Serial readout is tab-delineated, of the format: time [s], steps, current in coil A [mA], coil in current B [mA].
+      </p>
+      <p>
+        The broad strokes of the program are: <code>setup()</code> defines the pin inputs, turns everything off, and waits for user input with the switch. The <code>loop()</code> intitializes a step counter, defines a maximum step count, and records the start time, before calling the movement functions <code>forward()</code>&hairsp;and <code>back()</code>&mdash;or their halfstep variants&mdash;repeatedly until the limit switch or the stepcount max is hit, directional dependantly. The movement functions take the arguments of the start time and current step, for ease of data printing later, and iterate through one cycle of the coil polarity sequence, calling <code>readout()</code> at each sub-step, a custom defined function that prints the above-stated serial readout. The <code>coilA()</code> and <code>coilB()</code> functions simply serve to convert a passed polarity argument into the pin <code>HIGH</code>/<code>LOW</code> values the motor shield expects for each given polarity. Comments in the code above explain each function to a greater depth.
+      </p>
+    <div class="subhead small-caps" id="results">
+      <a href="#results">Test results</a></div>
+      <p>
+        The aforementioned readouts copied from serial monitor and plotted via Microsoft Excel.
+      </p>
+      <img src="/img/AngularDisplacementVSTime.PNG" id="angDisp" alt="Angular displacement vs. time"/>
+      <p>
+        Above is the results of the angular displacement over time test, with a substep delay interval of 2000&mu;s for the full-step regime, plotted in blue, and an interval of 1000&mu;s for the half-step regime, plotted in orange.
+      </p>
+      <img src="/img/iHalfVSTime.PNG" id="iHalf" alt="Current in coils A and B over time in halfstep regime."/>
+      <p>
+        Pictured: currents by coil in the half-step regime, over the same homing sequence seen in the angular displacement over time graph, with coil A in blue, and coil B in orange.
+      </p>
+      <img src="/img/iFullVSTime.PNG" id="iFull" alt="Current in coils A and B over time in fullstep regime."/>
+      <p>
+        Pictured: currents by coil in the full-step regime, over the same homing sequence seen in the angular displacement over time graph, with coil A in blue, and coil B in orange.
+      </p>
+    <div class="subhead small-caps" id="motion">
+      <a href="#motion">Loaded motion cycle</a></div>
+      <p>
+        Below is a recording of the linear stage carrying a partially-filled Mason jar weighing in at 0.8kg. The program is triggered by an initial press of the limit switch, travels until hitting the aforementioned switch, and returning to its home position.
+      </p>
+      <div class="videodiv"><iframe src="https://www.youtube-nocookie.com/embed/DrpjgVJvdvU?modestrbranding=1&title=&showinfo=0&controls=0&mute=1&rel=0&fs=0&disablekb=1" frameborder="0" allow="accelerometer; encrypted-media; gyroscope;" class="video"></iframe></div>
+    <div class=footer>
+      <p>Zachary Weiss<br/>4 October 2020</p>
+    </div>
+	</div>
+</div>
+</body>
+</html>
+<!-- 2020 Zachary Weiss -->

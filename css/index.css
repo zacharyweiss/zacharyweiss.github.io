@@ -114,6 +114,11 @@ div.footer > p{
     height: 100%;
 }
 
+td {
+	text-align: center;
+	padding: 5px;
+}
+
 topic {
 	display: block;
 	font-family: inherit;
