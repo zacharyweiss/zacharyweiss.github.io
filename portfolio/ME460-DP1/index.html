@@ -67,7 +67,7 @@
             </p>
         <div class="subhead small-caps" id="circuitry">
             <a href="#circuitry">Circuitry</a></div>
-            <img src="/img/limitswitch.png" id="limitwire" alt="Limit switch wired into Arduino with a pull-up resistor."/>
+            <img src="/img/ME460-DP1/limitswitch.png" id="limitwire" alt="Limit switch wired into Arduino with a pull-up resistor."/>
             <p>
               Above pictured is the wiring schema for the limit switch. A 10k&#8486; pull-up resistor is connected to the Arduino&rsquo;s 5V power, and then split back to digital pin ten and to ground through the switch. Given this: when the switch is depressed, the pin will read <code>LOW</code>, when released, it will read <code>HIGH</code>. The only other wired component of this project is the stepper motor, which connects to the coil A/B terminals of the motor shield in a 1&#8209;to&#8209;1 fashion. All other circuitry is internal to the motor shield and Arduino.
             </p>
@@ -351,15 +351,15 @@ void shutdown() {
             <p>
               The aforementioned readouts copied from serial monitor and plotted via Microsoft Excel.
             </p>
-            <img src="/img/AngularDisplacementVSTime.PNG" id="angDisp" alt="Angular displacement vs. time"/>
+            <img src="/img/ME460-DP1/AngularDisplacementVSTime.PNG" id="angDisp" alt="Angular displacement vs. time"/>
             <p>
               Above is the results of the angular displacement over time test, with a substep delay interval of 2000&mu;s for the full-step regime, plotted in blue, and an interval of 1000&mu;s for the half-step regime, plotted in orange.
             </p>
-            <img src="/img/iHalfVSTime.PNG" id="iHalf" alt="Current in coils A and B over time in halfstep regime."/>
+            <img src="/img/ME460-DP1/iHalfVSTime.PNG" id="iHalf" alt="Current in coils A and B over time in halfstep regime."/>
             <p>
               Pictured: currents by coil in the half-step regime, over the same homing sequence seen in the angular displacement over time graph, with coil A in blue, and coil B in orange.
             </p>
-            <img src="/img/iFullVSTime.PNG" id="iFull" alt="Current in coils A and B over time in fullstep regime."/>
+            <img src="/img/ME460-DP1/iFullVSTime.PNG" id="iFull" alt="Current in coils A and B over time in fullstep regime."/>
             <p>
               Pictured: currents by coil in the full-step regime, over the same homing sequence seen in the angular displacement over time graph, with coil A in blue, and coil B in orange.
             </p>
