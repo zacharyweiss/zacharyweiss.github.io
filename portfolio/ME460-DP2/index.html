@@ -83,8 +83,8 @@ int    targetSpd1 =   35, // mm per s
        targetSpd2 =   20,
        targetSpd3 =    6, // slowest speed possible
        targetSpd4 =   10,
-       dist2      =   20, // mm
-       dist4      =   60;
+       dist2      =   10, // mm
+       dist4      =   30;
 
 // global vars
 volatile long int pulses = 0;
@@ -95,25 +95,25 @@ double v_motor           = 0,
        d_err             = 0;
 
 void setup() {
-    Serial.begin(115200);
+  Serial.begin(115200);
 
-    attachInterrupt(digitalPinToInterrupt(2),count,RISING);
-    
-    pinMode(12,OUTPUT); // Dir
-    pinMode(3,OUTPUT);  // Current
-    pinMode(9,OUTPUT);  // Break
+  attachInterrupt(digitalPinToInterrupt(2),count,RISING);
   
-    pinMode(7,INPUT);
+  pinMode(12,OUTPUT); // Dir
+  pinMode(3,OUTPUT);  // Current
+  pinMode(9,OUTPUT);  // Break
 
-    // limit switch
-    pinMode(10,INPUT_PULLUP);
+  pinMode(7,INPUT);
 
-    digitalWrite(3,LOW);   // Motor off
-    digitalWrite(9,LOW);   // Disable brake
-    digitalWrite(12,LOW);  // Set direction
+  // limit switch
+  pinMode(10,INPUT_PULLUP);
 
-    while(digitalRead(10)); // wait for user input
-    delay(1000); // wait one second before beginning sequence
+  digitalWrite(3,LOW);   // Motor off
+  digitalWrite(9,LOW);   // Disable brake
+  digitalWrite(12,LOW);  // Set direction
+
+  while(digitalRead(10)); // wait for user input
+  delay(1000); // wait one second before beginning sequence
 }
 
 void loop() {
@@ -161,7 +161,7 @@ void setSpeed(double target_rpm) {
   delay(100);
   current_rpm = getSpeed(100000); 
 
-  // Print time [mcs], voltage [0-255], speed [rpm], pulses
+  // Print time [ms], voltage [0-255], speed [rpm], pulses
   Serial.println(String(millis())
     +"\t"
     +String(int(v_motor))
@@ -228,9 +228,9 @@ void shutdown() {
     <div class="subhead small-caps" id="motion">
       <a href="#motion">Loaded motion cycle</a></div>
       <p>
-        Below is a recording of the linear stage carrying a partially-filled Mason jar weighing in at 0.8kg. The program is triggered by an initial press of the limit switch, travels until hitting the aforementioned switch, and returning to its home position.
+        Below is a recording of the linear stage carrying a partially-filled Mason jar weighing in at 0.82kg. The program is triggered by an initial press of the limit switch, whereupon it travels along the homing sequence described in the <a href="#code">code</a> section.
       </p>
-      <div class="videodiv"><iframe src="https://www.youtube-nocookie.com/embed/DrpjgVJvdvU?modestbranding=1&title=&showinfo=0&controls=0&mute=1&rel=0&fs=0&disablekb=1" frameborder="0" allow="accelerometer; encrypted-media; gyroscope;" class="video"></iframe></div>
+      <div class="videodiv"><iframe src="https://www.youtube-nocookie.com/embed/3Z653l1FOS4?modestbranding=1&title=&showinfo=0&controls=0&mute=1&rel=0&fs=0&disablekb=1" frameborder="0" allow="accelerometer; encrypted-media; gyroscope;" class="video"></iframe></div>
     <div class=footer>
       <p>Zachary Weiss<br/>23 October 2020</p>
     </div>
