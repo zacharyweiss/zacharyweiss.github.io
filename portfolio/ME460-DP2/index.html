@@ -221,11 +221,11 @@ void shutdown() {
       <p>
         The aforementioned Serial monitor readouts from the homing sequence were parsed and plotted within Excel to produce the following results.
       </p>
-      <img src="/img/ME460-DP1/disp.png" id="linDisp" alt="Plot of linear displacement vs. time"/>
+      <img src="/img/ME460-DP2/disp.png" id="linDisp" alt="Plot of linear displacement vs. time"/>
       <p>
         Above is the linear displacement over time. Zero is the home position of the platform (30mm away from the motor and limit switch), with the positive direction towards the motor, and the negative direction away.
       </p>
-      <img src="/img/ME460-DP1/vel.png" id="linVel" alt="Plot of linear speed vs. time"/>
+      <img src="/img/ME460-DP2/vel.png" id="linVel" alt="Plot of linear speed vs. time"/>
       <p>
         Above is the absolute linear speed of the carraige (directionality of velocity not represented). Within the plot, there are two evident outlying points: the first sudden dip is likely a measurement / weak wiring connection; the second is likely a result of insufficient measurement frequency, as new readings are only made every tenth of a second (and velocity must drop to zero and back up each time the carriage switches direction), the same rate at which the applied motor voltage is recalculated. The minor overshoot, and the damping of the derivative term is evident most clearly in the final part of the regime, from 4 seconds onward, where it oscillates slightly about the target speed of 10mm/s.
       </p>
