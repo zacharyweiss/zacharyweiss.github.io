@@ -58,7 +58,7 @@
       <p>
         All other circuitry is internal to the motor shield and Arduino.
       </p>
-    <div class="subhead small-caps" id="code">
+    <div class="subhead small-caps" id="control">
       <a href="#control">Control Algorithm</a></div>
       <p>
         PID control is the most rudimentary of control schemas, easily being implemented on the lowest computing power microcontrollers, or even in a fully analog fashion. It consists of three terms: the proportional, integrative, and derivative control terms. Each takes an error signal, and by some tuned coefficient, feeds a response back into the system, seeking to minimize the error. In the proportional term, the error is simply the difference between the target value and the current value. In the integrative term, accumulated proportional error over time is considered, with proportional error that has lingered for longer having a higher weight; this is most useful in reducing residual error. In the derivative term, it considers the rate at which the proportional error is changing, most useful for preventing overshoot of a target value.
