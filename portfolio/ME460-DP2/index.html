@@ -50,10 +50,10 @@
       <a href="#circuitry">Circuitry</a></div>
       <img src="/img/ME460-DP2/wiring.png" id="limitwire" alt="Limit switch wired into Arduino with a pull-up resistor."/>
       <p>
-        Above pictured is the wiring schema for the limit switch and DC motor. The mini-breadboard at the top is symbolic of the motor shield; it recieves external power, the motor negative and positive are wired in, and controlling signals are provided via pins 3, 9, and 12 (connected via the shield, as represented by the grey wires). Ground is common across the shield and Arduino. The encoder wires directly into pins 2 and 7, as well as the Arduino 5V and ground supplies.
+        Above pictured is the wiring schema for the limit switch and DC motor. The mini-breadboard at the top is symbolic of the motor shield; it recieves external power, the motor negative and positive are wired in, and controlling signals are provided via pins <code>3</code>, <code>9</code>, and <code>12</code> (connected via the shield, as represented by the grey wires). Ground is common across the shield and Arduino. The encoder wires directly into pins <code>2</code> and <code>7</code>, as well as the Arduino <code>5V</code> and <code>GND</code> supplies.
       </p>
       <p>
-        The limit switch is wired in in the same fasion as in <a href="/portfolio/ME460-DP1">Design Project #1</a>: a 10k&#8486; pull-up resistor is connected to the Arduino&rsquo;s 5V power, and then split back to digital pin ten and to ground through the switch. Given this: when the switch is depressed, the pin will read <code>LOW</code>, when released, it will read <code>HIGH</code>. 
+        The limit switch is wired in in the same fasion as in <a href="/portfolio/ME460-DP1">Design Project #1</a>: a 10k&#8486; pull-up resistor is connected to the Arduino&rsquo;s <code>5V</code> power, and then split back to digital pin ten and to ground through the switch. Given this: when the switch is depressed, the pin will read <code>LOW</code>, when released, it will read <code>HIGH</code>. 
       </p>
       <p>
         All other circuitry is internal to the motor shield and Arduino.
@@ -61,8 +61,10 @@
     <div class="subhead small-caps" id="code">
       <a href="#control">Control Algorithm</a></div>
       <p>
-        a
+        PID control is the most rudimentary of control schemas, easily being implemented on the lowest computing power microcontrollers, or even in a fully analog fashion. It consists of three terms: the proportional, integrative, and derivative control terms. Each takes an error signal, and by some tuned coefficient, feeds a response back into the system, seeking to minimize the error. In the proportional term, the error is simply the difference between the target value and the current value. In the integrative term, accumulated proportional error over time is considered, with proportional error that has lingered for longer having a higher weight; this is most useful in reducing residual error. In the derivative term, it considers the rate at which the proportional error is changing, most useful for preventing overshoot of a target value.
       </p>
+      <p>
+        This project&rsquo;s deliverables simply called for proportional control, but due to significant observed overshoot at proportional coefficient values that avoided significant system lag, especially from a stopped state, I decided to implement a simple derivative control term as well, which can be enabled or disabled by use of the global flag <code>use_deriv</code> within the code. The implementation of this schema into code is as follows.
     <div class="subhead small-caps" id="code">
       <a href="#code">Code</a></div>
       <pre><code>/* Zachary Weiss
@@ -223,20 +225,12 @@ void shutdown() {
       <p>
         Above is the results of the angular displacement over time test, with a substep delay interval of 2000&mu;s for the full-step regime, plotted in blue, and an interval of 1000&mu;s for the half-step regime, plotted in orange.
       </p>
-      <img src="/img/iHalfVSTime.PNG" id="iHalf" alt="Current in coils A and B over time in halfstep regime."/>
-      <p>
-        Pictured: currents by coil in the half-step regime, over the same homing sequence seen in the angular displacement over time graph, with coil A in blue, and coil B in orange.
-      </p>
-      <img src="/img/iFullVSTime.PNG" id="iFull" alt="Current in coils A and B over time in fullstep regime."/>
-      <p>
-        Pictured: currents by coil in the full-step regime, over the same homing sequence seen in the angular displacement over time graph, with coil A in blue, and coil B in orange.
-      </p>
     <div class="subhead small-caps" id="motion">
       <a href="#motion">Loaded motion cycle</a></div>
       <p>
         Below is a recording of the linear stage carrying a partially-filled Mason jar weighing in at 0.8kg. The program is triggered by an initial press of the limit switch, travels until hitting the aforementioned switch, and returning to its home position.
       </p>
-      <div class="videodiv"><iframe src="https://www.youtube-nocookie.com/embed/DrpjgVJvdvU?modestrbranding=1&title=&showinfo=0&controls=0&mute=1&rel=0&fs=0&disablekb=1" frameborder="0" allow="accelerometer; encrypted-media; gyroscope;" class="video"></iframe></div>
+      <div class="videodiv"><iframe src="https://www.youtube-nocookie.com/embed/DrpjgVJvdvU?modestbranding=1&title=&showinfo=0&controls=0&mute=1&rel=0&fs=0&disablekb=1" frameborder="0" allow="accelerometer; encrypted-media; gyroscope;" class="video"></iframe></div>
     <div class=footer>
       <p>Zachary Weiss<br/>23 October 2020</p>
     </div>
