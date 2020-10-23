@@ -41,16 +41,21 @@
 		<div class="subhead small-caps" id="work">
       <a href="#work">Work description</a></div>
       <p>
-        The goal of this design project is to build a linear stage with closed-loop control, capable of moving 0.5kg to predefined locations along its path. This project builds upon the work of <a href="/porfolio/ME460-DP1">ME460 Design Project #1</a>, replacing the linear stage's stepper motor with a DC motor controled via a PD control schema. The following report is divided into eight sections: the <a href="#work">Work Description</a>, <a href="#circuitry">Circuitry</a>, <a href="#control">Control Algorithm</a>, <a href="#code">Code</a>, <a href="#results">Test Results</a>, and <a href="#motion">Loaded Motion Cycle</a>. The above can be used as a table of contents by clicking the desired section.
+        The goal of this design project is to build a linear stage with closed-loop control, capable of moving 0.5kg to predefined locations along its path. This project builds upon the work of <a href="/portfolio/ME460-DP1">ME460 Design Project #1</a>, replacing the linear stage&rsquo;s stepper motor with a DC motor controled via a PD control schema. The following report is divided into eight sections: the <a href="#work">Work Description</a>, <a href="#circuitry">Circuitry</a>, <a href="#control">Control Algorithm</a>, <a href="#code">Code</a>, <a href="#results">Test Results</a>, and <a href="#motion">Loaded Motion Cycle</a>. The above can be used as a table of contents by clicking the desired section.
       </p>
       <p>
-        Work was largely organized in the same fashion as the report&rsquo;s heirarchy; the rails were assembled as described in the <a href="#construction">mechanical construction</a> section and code was written for initial testing (described in the <a href="#code">code</a> and <a href="#tests">test procedure</a> / <a href="#results">results</a> sections). This was followed with the implementation of a limit switch&mdash;wired in as per the <a href="#circuitry">circuitry</a> section, and the code modified accordingly. Finally, the video of the <a href="#motion">stage in motion</a> was produced, integrating all prior work and demonstrating functionality meeting that which was set out within the goals.
+        The only physical construction required was the removal of the stepper motor, and mounting of the DC motor via a flexible coupling. The motor was wired into an Arduino motor shield as per the <a href="#circuitry">circuitry</a> section. The motor is controlled via a simple PID schema, only making use of the PD terms, as described in the <a href="#control">control algorithm</a> section; this schema is implemented in the <a href="#code">code</a> section, its homing sequenced tested in the <a href="#results">test results</a>, and footage of the sequence provided in the <a href="#motion">loaded motion cycle</a>.
         </p>
     <div class="subhead small-caps" id="circuitry">
       <a href="#circuitry">Circuitry</a></div>
       <img src="/img/limitswitch.png" id="limitwire" alt="Limit switch wired into Arduino with a pull-up resistor."/>
       <p>
         Above pictured is the wiring schema for the limit switch. A 10k&#8486; pull-up resistor is connected to the Arduino&rsquo;s 5V power, and then split back to digital pin ten and to ground through the switch. Given this: when the switch is depressed, the pin will read <code>LOW</code>, when released, it will read <code>HIGH</code>. The only other wired component of this project is the stepper motor, which connects to the coil A/B terminals of the motor shield in a 1&#8209;to&#8209;1 fashion. All other circuitry is internal to the motor shield and Arduino.
+      </p>
+    <div class="subhead small-caps" id="code">
+      <a href="#control">Control Algorithm</a></div>
+      <p>
+        a
       </p>
     <div class="subhead small-caps" id="code">
       <a href="#code">Code</a></div>
