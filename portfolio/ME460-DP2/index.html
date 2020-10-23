@@ -183,7 +183,7 @@ double getSpeed(long int mcs) {
   
   initialPulses = pulses;
   t0 = micros();
-  while(micros()-t0<mcs){} // hold for sample time
+  while(micros()-t0 < mcs){} // hold for sample time
   delta_pulses = abs(initialPulses-pulses);
 
   rpm = double(delta_pulses)/double(mcs)*1E+6 /double(PULSES) * 60.0;
