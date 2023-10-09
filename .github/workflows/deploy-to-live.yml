@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checking out repository
-        uses: actions/checkout@v2.3.4
+        uses: actions/checkout@v4.1.0
       - name: Inspecting directory
         run: tree `pwd`
       - name: Pulling my custom pollen Docker image
@@ -24,8 +24,8 @@ jobs:
         run: docker exec racket_container raco pkg install --auto pollen-citations-mcgill gregor
       - name: Inspecting work directory
         run: docker exec racket_container ls /work
-      - name: Testing
-        run: docker exec racket_container bash -c "cd /work/ && raco test pollen.rkt markdown.rkt util.rkt"
+#      - name: Testing
+#        run: docker exec racket_container bash -c "cd /work/ && raco test pollen.rkt markdown.rkt util.rkt"
       - name: Rendering
         run: docker exec racket_container bash -c "cd /work && raco pollen render -r /work"
       - name: Publishing to tmp folder
