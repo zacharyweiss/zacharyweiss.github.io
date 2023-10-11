@@ -4,7 +4,7 @@
 @import url('https://fonts.googleapis.com/css?family=Source+Code+Pro:400,500&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Source+Serif+Pro:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&display=swap');
 
-◊(define anchor-hover-color "#fbf3f3")
+◊(define anchor-hover-color "#fae6e6") ◊; #fbf3f3
 
 ◊; Responsive font sizes
 ◊(define width-for-max-font 920)
@@ -12,7 +12,7 @@
 ◊(define max-font-size 21)
 ◊(define font-size-on-small-screens 17)
 ◊(define small-screen-trigger (- width-for-max-font (* (- size-steps 1) 40)))
-◊(define background-color "#fdfaf3")
+◊(define background-color "#fff8e7") ◊; #fdfaf3 
 ◊(define dark-text-color "#111")
 ◊(define light-text-color "#474747")
 ◊(define very-light-text-color "#888")

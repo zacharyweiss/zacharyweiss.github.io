@@ -10,12 +10,11 @@
 
 ◊(define (include-files extension)
    (map (λ(str)(string->symbol (format "~a" (string-replace str extension "html"))))
-        (sort-by-date-val 
+        (sort-by-date-val (remove "index.html.pm"
           (filter (λ(str) (string-suffix? str extension))
                   (map path->string (directory-list ".")))
-        )))
+        ))))
 
 ◊(define pt `(pagetree-root ,@(include-files "html.pm")))
-
 ◊(if (pagetree? pt) pt "Oops, not a pagetree")
 
