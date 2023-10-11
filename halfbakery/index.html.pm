@@ -1,5 +1,5 @@
 #lang pollen
-◊(require "../pollen.rkt")
+◊(require "../ptree-utils.rkt")
 
 ◊define-meta[date]{19990208}
 ◊define-meta[title]{index}

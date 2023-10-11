@@ -1,5 +1,5 @@
 #lang pollen
-◊(require "../make-ptree.rkt")
+◊(require "../ptree-utils.rkt")
 ◊; builds a date-sorted ptree
 ◊(make-pt)
 
