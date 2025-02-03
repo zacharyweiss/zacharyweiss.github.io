@@ -1,5 +1,5 @@
 {
-  description = "A very basic flake";
+  description = "The Monospaced Web devshell + minor modifications";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
@@ -23,6 +23,7 @@
         in
         {
           default = pkgs.mkShell {
+            name = "web";
             packages = with pkgs; [
               live-server
               pandoc
