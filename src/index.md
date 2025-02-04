@@ -10,13 +10,42 @@ contact: <br><a href="https://github.com/zacharyweiss">github</a> <a href="https
 
 ## whois
 
+Howdy! I'm Zach, a Data Scientist with a background in Mechanical Engineering. Of late, I've been decarbonizing fertilizer production at [ReMo Energy](http://remo.energy/), and consulting on safe healthcare AI at [Sample](https://samplehc.com/).
+
+Incorrigibly curious, overly prone to nerdsniping. Recent rabbit holes have included: building IOT soil moisture sensors for my plants, classification and analytics on my cats' litter box usage, TPMS transmission recording & point-process modeling, solver-guided function synthesis for blackbox key derivation function reconstruction, reverse-engineering (and writing a parser for) Boston's transit fare media (CharlieCards), and migrating to a fully declarative & reproducible OS setup (NixOS).
+
 <div style="overflow:hidden">
-<figure class="avatar" style="float:left">
+<figure class="avatar" style="float:right">
   ![](./assets/avatar.png)
   <figcaption>Fig 1. Best attempt at drawing myself in [Mac-a-Mug Pro](https://www.macintoshrepository.org/3711-mac-a-mug-pro)</figcaption>
 </figure>
 
-Howdy! I'm Zach, a Data Scientist with a background in Mechanical Engineering. Of late, I've been decarbonizing fertilizer production at [ReMo Energy](http://remo.energy/), and consulting on safe healthcare AI at [Sample](https://samplehc.com/).
+<ul class="tree">
+<li><p style="margin: 0;"><strong>education</strong></p>
+* undergrad
+  * BU MechE
+    * Honor's College
+    * Dean's List
+    * Presidential Scholar Award
+* master's
+  * BU MechE
+    * Concentration in Systems, Dynamics, and Controls
+    * Concurrent joining ReMo as the first employee
+</li>
+<li><p style="margin: 0;"><strong>languages</strong></p>
+* fluent
+  * english
+  * python
+  * c
+  * nix
+* occasional use
+  * spanish
+  * racket (lisp)
+  * rust
+  * matlab
+  * cpp
+  * js
+</li></ul>
 
 </div>
 
