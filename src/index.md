@@ -12,7 +12,7 @@ contact: <br><a href="https://github.com/zacharyweiss">github</a> <a href="https
 
 Howdy! I'm Zach, a Data Scientist with a background in Mechanical Engineering. Of late, I've been decarbonizing fertilizer production at [ReMo Energy](http://remo.energy/), and consulting on safe healthcare AI at [Sample](https://samplehc.com/).
 
-Incorrigibly curious, overly prone to nerdsniping. Recent rabbit holes have included: building IOT soil moisture sensors for my plants, classification and analytics on my cats' litter box usage, TPMS transmission recording & point-process modeling, solver-guided function synthesis for blackbox key derivation function reconstruction, reverse-engineering (and writing a parser for) Boston's transit fare media (CharlieCards), and migrating to a fully declarative & reproducible OS setup (NixOS).
+Incorrigibly curious, overly prone to nerdsniping. Recent rabbit holes have included: building IOT soil moisture sensors for my plants, classification and analytics on my cats' litter box usage, TPMS transmission sniffing & point-process modeling, solver-guided function synthesis for blackbox key derivation function reconstruction, reverse-engineering (and writing a parser for) Boston's transit fare media (CharlieCards), and migrating to a fully declarative & reproducible OS setup (NixOS).
 
 <div style="overflow:hidden">
 <figure class="avatar" style="float:right">
