@@ -17,7 +17,7 @@ Incorrigibly curious, overly prone to nerdsniping. Recent rabbit holes have incl
 <div style="overflow:hidden">
 <figure class="avatar" style="float:right">
   ![](./assets/avatar.png)
-  <figcaption>Fig 1. Best attempt at drawing myself in [Mac-a-Mug Pro](https://www.macintoshrepository.org/3711-mac-a-mug-pro)</figcaption>
+  <figcaption>Fig 1. Best attempt at drawing myself in "Mac-a-Mug"</figcaption>
 </figure>
 
 <ul class="tree">
