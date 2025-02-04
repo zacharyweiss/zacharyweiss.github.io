@@ -54,7 +54,7 @@ body {
   width: 100%;
   margin: 0;
   padding: var(--line-height) 2ch;
-  max-width: calc(min(80ch, round(down, 100%, 1ch)));
+  max-width: min(80ch, 100%);
   line-height: var(--line-height);
   overflow-x: hidden;
 }
@@ -65,6 +65,12 @@ body {
   }
   body {
     padding: var(--line-height) 1ch;
+  }
+  .avatar {
+    float: none !important;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
   }
 }
 
@@ -330,6 +336,7 @@ textarea {
   line-height: normal;
   -webkit-font-smoothing: inherit;
   -moz-osx-font-smoothing: inherit;
+  appearance: none;
   -webkit-appearance: none;
 }
 

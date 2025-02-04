@@ -32,7 +32,7 @@
           ];
 
           shellHook = ''
-            make
+            echo 'Run `automk` to watch for file changes & rebuild automatically'
           '';
         };
       }
