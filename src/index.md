@@ -30,7 +30,7 @@ Incorrigibly curious, overly prone to nerdsniping. Recent rabbit holes have incl
 * master's
   * BU MechE
     * Concentration in Systems, Dynamics, and Controls
-    * Concurrent joining ReMo as the first employee
+    * Concurrent with joining ReMo as the first employee
 </li>
 <li><p style="margin: 0;"><strong>languages</strong></p>
 * fluent
