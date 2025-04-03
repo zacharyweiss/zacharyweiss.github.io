@@ -5,7 +5,7 @@ author: Zachary Weiss
 author-url: "https://zachary.ws"
 lang: en
 toc-title: Contents
-contact: <br><a href="https://github.com/zacharyweiss">github</a> <a href="https://www.linkedin.com/in/zacharyweiss99">linkedin</a> <a href="mailto:me@zachary.ws">email</a>
+contact: <br><a href="https://github.com/zacharyweiss">github</a> <a href="https://www.linkedin.com/in/zacharyws/">linkedin</a> <a href="mailto:me@zachary.ws">email</a>
 ---
 
 ## whois
