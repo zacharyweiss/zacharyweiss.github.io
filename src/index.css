@@ -4,10 +4,10 @@
   --font-family: "JetBrains Mono", monospace;
   --line-height: 1.2rem;
   --border-thickness: 2px;
-  --text-color: #111;
-  --text-color-alt: #111;
-  --background-color: #fdfaf3;
-  --background-color-alt: #f7e2e2;
+  --text-color: #24272b;
+  --text-color-alt: #24272b;
+  --background-color: #f2e6d4;
+  --background-color-alt: #ca736c;
 
   --font-weight-normal: 500;
   --font-weight-medium: 600;
@@ -509,10 +509,8 @@ label input {
   right: 0;
   bottom: 0;
   z-index: -1;
-  background-image: repeating-linear-gradient(
-      var(--color) 0 1px,
-      transparent 1px 100%
-    ),
+  background-image:
+    repeating-linear-gradient(var(--color) 0 1px, transparent 1px 100%),
     repeating-linear-gradient(90deg, var(--color) 0 1px, transparent 1px 100%);
   background-size: 1ch var(--line-height);
   margin: 0;

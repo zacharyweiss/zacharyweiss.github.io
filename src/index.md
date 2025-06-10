@@ -44,7 +44,7 @@ Incorrigibly curious, overly prone to nerdsniping. Recent rabbit holes have incl
   * rust
   * matlab
   * cpp
-  * js
+  * js / ts
 </li></ul>
 
 </div>
@@ -66,8 +66,8 @@ In addition to my contact methods above, I exist online, to varying degrees, at 
 
 ## Colophon
 
-Webdesign adapted from Oskar Wickström's [_The Monospaced Web_](https://github.com/owickstrom/the-monospace-web) and Lucien Hinderling's [personal site](https://hinderling.github.io/).
+Webdesign adapted from Oskar Wickström's [_The Monospaced Web_](https://github.com/owickstrom/the-monospace-web) and Lucien Hinderling's [personal site](https://hinderling.github.io/). Further inspiration from [_Tufte CSS_](https://edwardtufte.github.io/tufte-css/) and Matthew Butterick's [_Practical Typography_](https://practicaltypography.com/).
 
-Further inspiration from [_Tufte CSS_](https://edwardtufte.github.io/tufte-css/) and Matthew Butterick's [_Practical Typography_](https://practicaltypography.com/).
+Colors from Neal McKee's [_Penumbra_](https://github.com/nealmckee/penumbra) palette, constructed in the Björn Ottosson's fantastic perceptual colorspace [_Oklab_](https://bottosson.github.io/posts/oklab/).
 
 The source for this site is [here](https://github.com/zacharyweiss/zacharyweiss.github.io).
