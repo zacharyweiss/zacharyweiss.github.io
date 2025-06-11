@@ -74,6 +74,27 @@ body {
   }
 }
 
+::selection {
+  background: var(--text-color);
+  color: var(--background-color);
+}
+::-moz-selection {
+  background: var(--text-color);
+  color: var(--background-color);
+}
+::-o-selection {
+  background: var(--text-color);
+  color: var(--background-color);
+}
+::-ms-selection {
+  background: var(--text-color);
+  color: var(--background-color);
+}
+::-webkit-selection {
+  background: var(--text-color);
+  color: var(--background-color);
+}
+
 h1,
 h2,
 h3,
@@ -122,6 +143,11 @@ a {
 a:link,
 a:visited {
   color: var(--text-color);
+}
+a:hover {
+  color: var(--background-color);
+  background: var(--text-color);
+  text-decoration: none;
 }
 
 p {
@@ -389,7 +415,8 @@ button {
 }
 
 button:hover {
-  background: var(--background-color-alt);
+  background: var(--text-color);
+  color: var(--background-color);
 }
 button:active {
   transform: translate(2px, 2px);
