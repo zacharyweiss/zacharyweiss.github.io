@@ -1,15 +1,19 @@
-@import url("https://fonts.cdnfonts.com/css/jetbrains-mono-2");
+@font-face {
+  font-family: "MartianMonoVF";
+  src: url("/assets/MartianMonoVF.woff2") format("woff2");
+}
 
 :root {
-  --font-family: "JetBrains Mono", monospace;
-  --line-height: 1.2rem;
+  --font-family: "MartianMonoVF", monospace;
+  --line-height: 1.4rem;
   --border-thickness: 2px;
+  --grid-gap: 1ch;
   --text-color: #24272b;
   --text-color-alt: #24272b;
   --background-color: #f2e6d4;
   --background-color-alt: #ca736c;
 
-  --font-weight-normal: 500;
+  --font-weight-normal: 450;
   --font-weight-medium: 600;
   --font-weight-bold: 800;
 
@@ -18,6 +22,8 @@
   font-weight: var(--font-weight-normal);
   font-style: normal;
   font-variant-numeric: tabular-nums lining-nums;
+  font-feature-settings: "ss03", "cv01", "kern", "case", "zero", "mgrk";
+
   font-size: 16px;
 }
 
@@ -32,6 +38,7 @@
 
 * {
   box-sizing: border-box;
+  -webkit-user-drag: none;
 }
 
 * + * {
@@ -111,10 +118,12 @@ h1 {
   line-height: calc(2 * var(--line-height));
   margin-bottom: calc(var(--line-height) * 2);
   text-transform: uppercase;
+  font-variation-settings: "cpsp";
 }
 h2 {
   font-size: 1rem;
   text-transform: uppercase;
+  font-variation-settings: "cpsp";
 }
 
 hr {
@@ -388,6 +397,7 @@ input[type="radio"]:before {
 }
 
 button:focus,
+.button:focus,
 input:focus {
   --border-thickness: 3px;
   outline: none;
@@ -403,22 +413,26 @@ input {
 ::-ms-input-placeholder {
   color: var(--text-color-alt);
 }
-button::-moz-focus-inner {
+button::-moz-focus-inner,
+.button::-moz-focus-inner {
   padding: 0;
   border: 0;
 }
 
-button {
+button,
+.button {
   text-transform: uppercase;
   font-weight: var(--font-weight-medium);
   cursor: pointer;
 }
 
-button:hover {
+button:hover,
+.button:hover {
   background: var(--text-color);
   color: var(--background-color);
 }
-button:active {
+button:active,
+.button:active {
   transform: translate(2px, 2px);
 }
 
@@ -520,6 +534,26 @@ label input {
 }
 .grid:has(> :last-child:nth-child(9)) {
   --grid-cells: 9;
+}
+
+.grid.vertical {
+  flex-direction: column;
+  width: auto;
+  height: auto;
+  gap: 1ch;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.grid.vertical > * {
+  flex: 0 0 auto;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.grid.vertical > *:first-child {
+  margin-top: inherit;
+}
+.grid.vertical > *:last-child {
+  margin-bottom: inherit;
 }
 
 /* DEBUG UTILITIES */

@@ -1,11 +1,11 @@
 ---
 title: Zachary Weiss
-subtitle: lim[n→_inf_] n_(_hats worn_)
+subtitle: lim[n->_inf_] n_(_hats worn_)
 author: Zachary Weiss
 author-url: "https://zachary.ws"
 lang: en
 toc-title: Contents
-contact: <br><a href="https://github.com/zacharyweiss">github</a> <a href="https://www.linkedin.com/in/zacharyws/">linkedin</a> <a href="mailto:me@zachary.ws">email</a>
+contact: <br><a href="mailto:me@zachary.ws">email</a> <a href="https://github.com/zacharyweiss">github</a> <a href="https://www.linkedin.com/in/zacharyws/">linkedin</a>
 ---
 
 ## whois
@@ -22,13 +22,12 @@ Incorrigibly curious, overly prone to nerdsniping. Recent rabbit holes have incl
 
 <ul class="tree">
 <li><p style="margin: 0;"><strong>education</strong></p>
-* undergrad
-  * BU MechE
+* BU MechE
+  * undergrad
     * Honor's College
     * Dean's List
     * Presidential Scholar Award
-* master's
-  * BU MechE
+  * master's
     * Concentration in Systems, Dynamics, and Controls
     * Concurrent with joining ReMo as the first employee
 </li>
@@ -38,7 +37,7 @@ Incorrigibly curious, overly prone to nerdsniping. Recent rabbit holes have incl
   * python
   * c
   * nix
-* occasional use
+* occasional
   * spanish
   * racket (lisp)
   * rust
@@ -53,6 +52,7 @@ Incorrigibly curious, overly prone to nerdsniping. Recent rabbit holes have incl
 
 In addition to my contact methods above, I exist online, to varying degrees, at the following:
 
+<div class="grid vertical">
 <div class="grid">
 <button onclick="window.location.href='https://open.spotify.com/user/zacharyweiss';">Spotify</button>
 <button onclick="window.location.href='https://www.instagram.com/weiss.zachary/';">Instagram</button>
@@ -63,11 +63,12 @@ In addition to my contact methods above, I exist online, to varying degrees, at 
 <button onclick="window.location.href='https://www.goodreads.com/user/show/121959194';">Goodreads</button>
 <button onclick="window.location.href='https://boxd.it/4qW7j';">Letterboxd</button>
 </div>
+</div>
 
 ## Colophon
 
-Webdesign adapted from Oskar Wickström's [_The Monospaced Web_](https://github.com/owickstrom/the-monospace-web) and Lucien Hinderling's [personal site](https://hinderling.github.io/). Further inspiration from [_Tufte CSS_](https://edwardtufte.github.io/tufte-css/) and Matthew Butterick's [_Practical Typography_](https://practicaltypography.com/).
+Webdesign adapted from Oskar Wickström's [The Monospaced Web](https://github.com/owickstrom/the-monospace-web) and Lucien Hinderling's [personal site](https://hinderling.github.io/). Further inspiration from [Tufte CSS](https://edwardtufte.github.io/tufte-css/) and Matthew Butterick's [Practical Typography](https://practicaltypography.com/).
 
-Colors from Neal McKee's [_Penumbra_](https://github.com/nealmckee/penumbra) palette, constructed in the Björn Ottosson's fantastic perceptual colorspace [_Oklab_](https://bottosson.github.io/posts/oklab/).
+Typeface is [Martian Mono](https://github.com/evilmartians/mono). Colors from Neal McKee's [Penumbra](https://github.com/nealmckee/penumbra) palette, constructed in Björn Ottosson's fantastic perceptual colorspace [Oklab](https://bottosson.github.io/posts/oklab/).
 
 The source for this site is [here](https://github.com/zacharyweiss/zacharyweiss.github.io).

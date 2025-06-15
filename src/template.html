@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html
   xmlns="http://www.w3.org/1999/xhtml"
   lang="$lang$"
@@ -32,7 +32,7 @@
     $endfor$ $for(header-includes)$ $header-includes$ $endfor$ $if(math)$ $math$
     $endif$
   </head>
-  <body>
+  <body draggable="false">
     $for(include-before)$ $include-before$ $endfor$
     <table class="header">
       <tr>
@@ -57,7 +57,6 @@
       $endif$ $table-of-contents$
     </nav>
     $endif$ $body$ $for(include-after)$ $include-after$ $endfor$
-    <div class="debug-grid"></div>
     <script src="src/index.js"></script>
   </body>
 </html>
