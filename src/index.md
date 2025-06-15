@@ -67,7 +67,7 @@ In addition to my contact methods above, I exist online, to varying degrees, at 
 
 ## Colophon
 
-Webdesign adapted from Oskar Wickström's [The Monospaced Web](https://github.com/owickstrom/the-monospace-web) and Lucien Hinderling's [personal site](https://hinderling.github.io/). Further inspiration from [Tufte CSS](https://edwardtufte.github.io/tufte-css/) and Matthew Butterick's [Practical Typography](https://practicaltypography.com/).
+Webdesign adapted from Oskar Wickström's [The Monospace Web](https://github.com/owickstrom/the-monospace-web) and Lucien Hinderling's [personal site](https://hinderling.github.io/). Further inspiration from [Tufte CSS](https://edwardtufte.github.io/tufte-css/) and Matthew Butterick's [Practical Typography](https://practicaltypography.com/).
 
 Typeface is [Martian Mono](https://github.com/evilmartians/mono). Colors from Neal McKee's [Penumbra](https://github.com/nealmckee/penumbra) palette, constructed in Björn Ottosson's fantastic perceptual colorspace [Oklab](https://bottosson.github.io/posts/oklab/).
 
