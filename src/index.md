@@ -10,7 +10,7 @@ contact: <br><a href="mailto:me@zachary.ws">email</a> <a href="https://github.co
 
 ## whois
 
-Howdy! I'm Zach, a Data Scientist with a background in Mechanical Engineering. Of late, I've been decarbonizing fertilizer production at [ReMo Energy](http://remo.energy/), and consulting on safe healthcare AI at [Sample](https://samplehc.com/).
+Howdy! I'm Zach. Of late, I've been decarbonizing fertilizer production at [ReMo Energy](https://remo.energy/), and making batteries reliable, writing Nix at [Glimpse](https://glimp.se/).
 
 Incorrigibly curious, overly prone to nerdsniping. Recent rabbit holes have included: building IOT soil moisture sensors for my plants, classification and analytics on my cats' litter box usage, TPMS transmission sniffing & point-process modeling, solver-guided function synthesis for blackbox key derivation function reconstruction, reverse-engineering (and writing a parser for) Boston's transit fare media (CharlieCards), and migrating to a fully declarative & reproducible OS setup (NixOS).
 
@@ -21,16 +21,6 @@ Incorrigibly curious, overly prone to nerdsniping. Recent rabbit holes have incl
 </figure>
 
 <ul class="tree">
-<li><p style="margin: 0;"><strong>education</strong></p>
-* BU MechE
-  * undergrad
-    * Honor's College
-    * Dean's List
-    * Presidential Scholar Award
-  * master's
-    * Concentration in Systems, Dynamics, and Controls
-    * Concurrent with joining ReMo as the first employee
-</li>
 <li><p style="margin: 0;"><strong>languages</strong></p>
 * fluent
   * english
